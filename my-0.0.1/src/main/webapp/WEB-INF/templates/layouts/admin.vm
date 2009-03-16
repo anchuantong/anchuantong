@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+<meta http-equiv="Pragma" content="no-cache" /> 
+<meta http-equiv="Cache-Control" content="no-cache" /> 
+<meta http-equiv="Expires" content="0" /> 
+<link rel="stylesheet" type="text/css" href="$root/theme/01/style.css" />
+<link rel="stylesheet" type="text/css" href="$root/theme/01/admin.css" />
+<title>$_title_</title>
+</head>
+<body>
+<div id="main">	
+    <div id="top">	
+        <div id="logo"></div>
+		<div id="menubar">
+			<p>欢迎光临易展</p>
+			<span>登录</span>
+			<span>登录</span>
+			<span>登录</span>
+			<span>登录</span>
+			<span>登录</span>
+			<span>登录</span>
+			<span>登录</span>
+			<span>登录</span>
+			<span>登录</span>
+			<span>登录</span>
+			<span>登录</span>
+			<span>登录</span>
+		</div>
+    </div>
+<div class="hackbox"></div>
+<ul id="amenubar">
+	<li><a href="category">板块管理</a></li>
+	<li><a href="#">角色管理</a></li>
+	<li><a href="#">用户管理</a></li>
+	<li class="on"><a href="#">帖子管理</a></li>
+</ul>
+#parse ( "${_page_body_}.vm" )
+#parse("includes/bottom.vm")	

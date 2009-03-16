@@ -1,0 +1,25 @@
+#set($root=$request.getContextPath())
+<div id="pcontent">
+         <div id="pleft">
+			<h2>$category.getRoot().Name</h2>
+			#if($category.Children&&$category.Children.size()>0)	
+             <ul>
+			 #foreach($n in $category.Children)	
+              <li><a href="$root/portal/article/index/$n.Id">$n.Name</a></li>
+             #end 
+             </ul> 
+			#end 
+          </div>
+          <div id="pright">
+              #foreach($n in $list)
+				<ul id="list">
+				  <p class="t"><a href="../detail/${n.Id}">$n.Title</a></p>
+				  <p class="d">$n.Description</p>  
+				  <li>更新时间:<a href=""></a></li>
+				  <li> | 类别:</li>
+				  <li> | 类别:</li>
+				</ul>
+			  #end
+          </div>
+          <div class="hackbox"></div>
+</div>

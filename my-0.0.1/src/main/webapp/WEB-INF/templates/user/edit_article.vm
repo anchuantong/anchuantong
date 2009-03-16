@@ -1,0 +1,29 @@
+<div id="content">
+	<div class="dh"><a href="$root/index.htm">首页</a>>>编辑日志</div>
+	<div id="editbox">
+	<form name="form1" id="form1" method="POST">	
+	<ul>	
+	   <li class="lb">标题：</li>
+	   <li class="fd"><input type="text" name="title" id="title" value="" class="ipt"/></li>
+	   <li class="lb">内容：</li>
+	   <li class="fd"><textarea name="body" id="body" style="width:800px;height:300px;"></textarea></li>
+	   <li class="lb">分类：</li>
+	   <li class="fd"><select name="catId" id="catId">
+						<option>全部</option>
+	                  </select>
+	   </li>
+	   <li class="lb">&nbsp;</li>
+	   <li class="fd">
+		      <input type="submit" name="s1" value="保存" />
+			  <input type="submit" name="s1" value="保存并新增" />
+			  <input type="submit" name="s1" value="预览" />
+			  <input type="submit" name="s1" value="删除" />
+	   </li>
+	</ul>
+	</form>
+	<div class="hackbox"></div>
+	</div>
+</div>	
+#set($body_name="body")
+#showEditorHtml(["$body_name"] "ADMIN" 600 400)
+#parse("includes/user_upload_img.vm")

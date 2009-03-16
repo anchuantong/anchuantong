@@ -1,0 +1,5 @@
+#parse("includes/head.vm")	
+
+
+#parse ( "${_page_body_}.vm" )
+#parse("includes/bottom.vm")	

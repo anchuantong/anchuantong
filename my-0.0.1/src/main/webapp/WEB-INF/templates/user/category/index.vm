@@ -1,0 +1,9 @@
+#set($root=$request.getContextPath())
+<div id="content">
+<a href="showEdit">[新增分类]</a>	
+<ul class="categories">
+#foreach($n in $categories)
+	#recursiveCategoryTree($n "&nbsp;&nbsp;")
+#end	
+</ul>
+</div>

@@ -1,0 +1,35 @@
+#set($root=$request.getContextPath())
+#set($back_url=$request.getParameter("back_url"))
+#if(!$back_url)
+	#set($back_url="index")
+#end	
+<script src="$imgs/js/formbox.js"></script>
+<div id="sucbox">
+<div id="sucbody">
+<p class="sucmsg"> 
+<img src="$imgs/images/success.gif" align="absmiddle">
+	 #if($util.isNotEmpty($msg))
+		$msg
+	#else	
+	 操作保存成功#end
+     </p>
+<p class="sucauto">	 
+	 ##if($timer>0)
+	<span id="count_num">5</span>妙后自动返回
+	 ##end
+</p>
+<p class="sucback"><a href="$back_url">返回</a></p>
+</div>
+</div>
+
+<script>
+function countDown(secs,url){ 
+document.getElementById("count_num").innerHTML=secs;
+ if(--secs>0){
+     var t=setTimeout("countDown("+secs+",'"+url+"')",1000); 
+     }else{
+     location.href=url;
+     }
+} 
+	countDown(5,"$back_url");
+</script>

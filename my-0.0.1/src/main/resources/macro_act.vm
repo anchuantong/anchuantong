@@ -1,0 +1,55 @@
+#macro (recursiveCategoryTree $cat $indent)
+	<li>
+		<a href="showEdit" class="n">
+			$indent$cat.Name
+	    </a>
+		<a href="showEdit?id=$cat.Id">
+			[±à¼­]
+	    </a>
+		<a href="delete?id=$cat.Id"  onclick="return confirm('È·ÈÏÉ¾³ý')">
+			[É¾³ý]
+	    </a>
+	#if($cat.Children&&$cat.Children.size()>0)
+	  <ul class="categories">
+	    #foreach($child in $cat.Children)
+		   #recursiveCategoryTree($child "$indent$indent")
+		#end
+	  </ul> 	
+	#end
+	</li>	
+#end	
+
+
+#macro (recursiveCategoryOption $cat $parentId $indent)
+	<option value="$cat.Id" #if("$cat.Id"=="$parentId") selected="selected"#end>$indent$cat.Name</option>
+	#if($cat.Children&&$cat.Children.size()>0)
+	    #foreach($child in $cat.Children)
+		   #recursiveCategoryOption($child $parentId "$indent$indent")
+		#end
+	#end
+#end	
+
+
+#macro(showEditorHtml $arr $basePath $width $height)
+	
+	<script type="text/javascript">
+		    var uploadImg=true;
+	</script>
+		
+	<script type="text/javascript" src="$imgs/js/FCKeditor/fckeditor.js"></script>
+	<script type="text/javascript">
+		#set($i=1)
+		
+		#foreach($n in $arr)
+			var oFCKeditor$i;
+			var sBasePath = "$imgs/js/FCKeditor/";
+			oFCKeditor${i} = new FCKeditor( "$n") ;
+			oFCKeditor${i}.BasePath	= sBasePath ;
+			oFCKeditor${i}.ToolbarSet = "$basePath";
+			oFCKeditor${i}.Width = $width;
+			oFCKeditor${i}.Height = $height;
+			oFCKeditor${i}.ReplaceTextarea() ;
+			#set($i=$i+1)
+		#end
+	</script>
+#end

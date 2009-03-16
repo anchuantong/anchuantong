@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<link rel="stylesheet" type="text/css" href="$root/css/01/style.css" />
+<script src="$imgs/js/jquery.js"></script>
+<title>业务模式</title>
+</head>
+<body>
+  <div id="headtar"><p>安传统的网站<br/>http://www.eeeee.com</p></div>
+  <div id="main">
+      <div id="menubar">
+          <div id="menul"></div>
+          <ul>
+             <li><a href="#">首页</a></li>
+             <li class="line"></li>
+             <li><a href="#">日志</a></li>
+             <li class="line"></li>
+             <li><a href="#" class="on">相册</a></li>
+             <li class="line"></li>
+             <li><a href="#">作品</a></li>
+             <li class="line"></li>
+             <li><a href="#">分享</a></li>
+             <li class="line"></li>
+             <li><a href="#">人物</a></li>
+             <li class="line"></li>
+             <li><a href="#">团队</a></li>
+            
+          </ul>
+          <div id="menur"></div>
+          <div id="searchbar">
+            <form name="search_form">
+             <p><input type="text" name="keyword" class="skd"/></p>
+             <p><input type="image" src="$root/css/01/images/sbtn.gif" class="sbtn" width="49" height="23"></p>
+            </form>
+          </div>
+          
+      </div>
+	  #inputText(["fds",12])
+     ##parse ( "${_page_body_}.vm" )
+     
+  </div>
+</body>

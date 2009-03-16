@@ -1,0 +1,179 @@
+
+#macro (showError $field)
+	#if($cgi.isFieldError($field))
+		<span class="error"><img src="$root/admin/images/alert.gif" align="absmiddle"> $cgi.getFieldError($field)</span>
+	#end
+	
+#end
+
+#macro (showErrorIcon $field)
+	#if($cgi.isFieldError($field))
+		<span class="error"><img src="$root/admin/images/alert.gif" align="absmiddle"></span>
+	#end
+#end
+
+#macro (showFormStatus)
+	#if($cgi.isPostMode())
+		#if($cgi.isFormError())
+			<div class="error" style="font-size:14px;font-weight:bold"> <img src="$root/admin/images/error.gif" align="absmiddle"> 对不起,你提交的表单发现错误, 请修改有<img src="$root/admin/images/alert.gif" align="absmiddle">标识的字段后重新提交</div>
+		#else
+			<div class="success" style="font-size:14px;font-weight:bold"> <img src="$root/admin/images/success.gif" align="absmiddle"> 表单已经成功提交 </div>
+		#end
+	#end
+#end
+
+
+#macro (showFormStatusRedirect $url)
+	#if($cgi.isPostMode())
+		#if($cgi.isFormError())
+			<div class="error" style="font-size:14px;font-weight:bold"> <img src="$root/admin/images/error.gif" align="absmiddle"> 对不起,你提交的表单发现错误, 请修改有<img src="$root/admin/images/alert.gif" align="absmiddle">标识的字段后重新提交</div>
+		#else
+			<div class="success" style="font-size:14px;font-weight:bold"> <img src="$root/admin/images/success.gif" align="absmiddle"> 表单已经成功提交 </div>
+			<meta http-equiv="refresh" content="3; url='$root/portal/hospital?action=View&hospitalId=$hospitalId'">  
+		#end
+	#end
+#end
+
+
+
+#macro (rotateColor) #if($velocityCount%2==0) class="even" #else class="odd" #end #end
+
+#macro (inputText $arr)
+	#set ($_name  = $util.getElementAt($arr,0))
+	#set ($_value = $util.escapeHtml($util.getElementAt($arr,1,"")))
+	#set ($_size  = $util.getElementAt($arr,2,20))
+	<input id="$_name" type="text" name="$_name" value="$_value" size="$_size" />
+#end
+
+#macro (inputTextTime $arr)
+	#set ($_name  = $util.getElementAt($arr,0))
+	#set ($_value = $util.escapeHtml($util.getElementAt($arr,1,"")))
+	#set ($_size  = $util.getElementAt($arr,2,20))
+	<input id="$_name" type="text" name="$_name" value="$_value" size="$_size" readOnly="true" />
+#end
+
+#macro (inputPassword $arr)
+	#set ($_name  = $util.getElementAt($arr,0))
+	#set ($_value = $util.getElementAt($arr,1,""))
+	#set ($_size  = $util.getElementAt($arr,2,20))
+	<input id="$_name" type="password" name="$_name" value="$_value" size="$_size"/>
+#end
+
+#macro (inputSubmit $arr)
+	#set ($_name  = $util.getElementAt($arr,0))
+	#set ($_value = $util.getElementAt($arr,1,""))
+	#set ($_size  = $util.getElementAt($arr,2,20))
+	<input type="submit" name="$_name" value="$_value"/>
+#end
+
+#macro (inputHidden $arr)
+	#set ($_name  = $util.getElementAt($arr,0))
+	#set ($_value = $util.getElementAt($arr,1,""))	
+	<input type="hidden" name="$_name" value="$_value"/>
+#end
+
+#macro (inputReset $arr)
+	#set ($_name  = $util.getElementAt($arr,0))
+	#set ($_value = $util.getElementAt($arr,1,""))
+	#set ($_size  = $util.getElementAt($arr,2,20))
+	<input type="reset" name="$_name" value="$_value"/>
+#end
+
+#macro (inputOption $arr)
+	#set ($_value  = $util.getElementAt($arr,0))
+	#set ($_text   = $util.getElementAt($arr,1,""))
+	#set ($_check  = $util.getElementAt($arr,2,""))
+	<option value="$_value"#isSelected($_value $_check)>$_text</option>
+#end
+
+#macro (inputCheckbox $arr)
+	#set ($_name   = $util.getElementAt($arr,0))
+	#set ($_value  = $util.getElementAt($arr,1))
+	#set ($_text   = $util.getElementAt($arr,2,""))
+	#set ($_check  = $util.getElementAt($arr,3,""))
+	<input type="checkbox" name="$_name" value="$_value"#isChecked($_value $_check)/>$_text
+#end
+
+#macro (inputRadio $arr)
+	#set ($_name   = $util.getElementAt($arr,0))
+	#set ($_value  = $util.getElementAt($arr,1))
+	#set ($_text   = $util.getElementAt($arr,2,""))
+	#set ($_check  = $util.getElementAt($arr,3,""))
+	<input type="radio" name="$_name" value="$_value"#isChecked($_value $_check)/>$_text
+#end
+
+
+#macro (inputFile $arr)
+	#set ($_name  = $util.getElementAt($arr,0))
+	#set ($_value = $util.escapeHtml($util.getElementAt($arr,1,"")))
+	#set ($_size  = $util.getElementAt($arr,2,20))
+	<input id="$_name" type="file" name="$_name" value="$_value" size="$_size"/>
+#end
+
+
+#macro (isSelected $value1 $value2)
+	#if($value1 == $value2) selected="selected"#end
+#end
+
+#macro (isChecked $value1 $value2)
+	#if($value1 == $value2) checked="checked"#end
+#end
+
+#macro (hr)
+<hr noshade="noshade" size="1"/>
+#end
+
+
+#macro(usePageBuilder $pb $baseUrl $closeUrl) 
+#set ( $pages = $pb.slider2())
+#set ( $pge  = $pb.page())
+#if($pb.pages()>1)
+<table cellspacing=0 cellpadding=2 border=0>
+<tr>
+<td>
+分页:
+	#if($pge!=$pb.firstPage())
+		<a href="$baseUrl${pb.previousPage()}$closeUrl">&lt; 上一页</a>
+	#else
+	    <font color="#CCCCCC">&lt; 上一页</font>
+	#end	
+	#set ($i=0)
+	#foreach ($p in $pages)
+		#if($pb.isSeparator($p))
+		    ...
+		#elseif ($pb.isDisabledPage($p))
+			<b>$p</b>#if($pb.hasNextPage($pages,$i)),&nbsp;#end
+		#else 
+			<a href='$baseUrl$p$closeUrl'><b>$p</b></a>#if($pb.hasNextPage($pages,$i)),&nbsp;#end
+		#end        
+        #set ($i=$i+1)
+	#end
+	#if($pge!=$pb.lastPage())
+		<a href='$baseUrl${pb.nextPage()}$closeUrl'>下一页 &gt;</a>
+	#else
+	    <font color="#CCCCCC">下一页 &gt;</font>
+	#end
+		转到第<input type="text" name="page" id="page" value="" size="3" onkeydown="checkPage(event,this.value)"/>页&nbsp;&nbsp;<input type="button" name="rej" id="rej" value="确认" onclick="changeUrl()">
+		
+</td></tr>
+</table>
+#end
+#end
+
+
+#macro (recursiveCategory $cat $excluedId $selectedId $indent)
+    #if ($cat.Id!=$excluedId)
+        <option value="$cat.Id" #if($cat.Id==$selectedId) selected="selected"  #end>$indent$cat.Name</option>
+        #foreach ($child in $cat.Children)
+            #recursiveCategory ($child $excluedId $selectedId "$indent&nbsp;&nbsp;&nbsp;&nbsp;")
+        #end
+    #end
+#end
+
+
+
+
+
+
+
+	

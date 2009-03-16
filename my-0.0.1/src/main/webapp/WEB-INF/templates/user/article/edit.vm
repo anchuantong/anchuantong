@@ -1,0 +1,57 @@
+#set($root=$request.getContextPath())
+#if($article&&$article.Parts)
+  #set($partSize=$article.Parts.size())
+  #set($articlePart=$!article.Parts.get($!part))
+#else
+	 #set($partSize=0)
+#end	
+
+<div id="content">
+	<form name="form1" id="form1" method="POST" action="edit">
+		#inputHidden(["back_url","index"])
+		#inputHidden(["id","$!article.Id"])
+		#inputHidden(["part","$!part"])
+		<p>
+			<label>标题：</label>
+			<input type="text" name="title"  class="ipt" size="50" value="$!article.Title"/>	
+		</p>	
+		#if($partSize>0)
+		<p>
+			<label>本页标题：</label>
+			<input type="text" name="partTitle"  class="ipt" size="50" value="$!articlePart.Title"/>	
+		</p>	
+		<p>
+			#foreach($n in [1..$partSize])
+					#set($p=$n - 1)
+					#if($part==$p)
+						<b>$n</b>
+					#else	
+					  [<a href="showEdit?id=$article.Id&part=$p">$n</a>]
+					#end
+					#end	
+			[<a href="addPart?id=$article.Id">增加一页</a>]
+			[<a href="deletePart?id=$article.Id&part=$!part">删除当前页</a>]
+		</p>
+		#end
+		<p>
+			<label>内容：</label><br/>
+			<textarea type="text" name="body" >$!articlePart.Body</textarea>
+		</p>	
+		
+		<p>
+			<label>对应分类：</label><br/>
+			<select name="catId">
+				<option value="-1">---</option>
+				#foreach($n in $categories)
+					#recursiveCategoryOption($n $article.Category.Id "&nbsp;&nbsp;")
+                #end	
+			</select>	
+		</p>
+		<p>
+			<label>&nbsp;</label>
+			<input type="submit" name="s" value="保存" class="btn"/>
+			&nbsp;&nbsp;<input type="button" name="s" value="返回" class="btn" onclick="location.href='index'"/>
+		</p>
+	</form>	
+</div>	
+#showEditorHtml(["body"] "EXPOPO" 500 500)

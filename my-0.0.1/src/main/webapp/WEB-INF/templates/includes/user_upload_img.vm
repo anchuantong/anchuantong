@@ -1,0 +1,21 @@
+#parse("/includes/editor_script.vm")
+<script src="$imgs/js/showWindow.js"></script>
+<script src="$imgs/js/drag.js"></script>
+<script >
+var showW=new ShowWindow();
+function openUpload(){
+    
+    showW.init("²åÈëÍ¼Æ¬","$root/user/upload.do?action=ListImage&objectType=trade&id=$!tradeInfo.Id",600,400);
+	var dd=new Drags();
+    dd.init("box_body","box_title")
+}
+function insertImgToBody(path,width,height) {
+        path = "$imgs/upload/"+path;
+        if(width>0) {            
+            insertImg(path,width,height);
+        }
+		showW.close()
+}
+
+
+</script>

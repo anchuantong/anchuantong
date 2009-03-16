@@ -1,0 +1,43 @@
+#set($root=$request.getContextPath())
+<div id="content">
+	<form name="form1" id="form1" method="POST" action="edit">
+		#inputHidden(["back_url","index"])
+		#inputHidden(["id","$!category.Id"])
+		<p>
+			<label>分类名：</label>
+			<input type="text" name="name"  class="ipt" size="50" value="$!category.Name"/>	
+		</p>	
+		<p>
+			<label>访问路径：</label>
+			<input type="text" name="path"  class="ipt" size="50" value="$!category.Path"/>	
+		</p>	
+		<p>
+			<label>位置：</label>
+			<input type="text" name="pos"  class="ipt" size="50" value="$!category.Pos"/>	
+		</p>
+		<p>
+			<label>类别：</label><br/>
+			<select name="type">
+				<option value="1">文字列表</option>
+				<option value="2" #if($!category.Type==2) selected="selected"#end>图文混排</option>
+			</select>	
+		</p>
+		<p>
+			<label>访问密码：</label>
+			<input type="text" name="password"  class="ipt" size="50" value=""  value="$!category.Password"/>	不填表示公开
+		</p>
+		<p>
+			<label>上层分类$category.Parent.Id：</label><br/>
+			<select name="parentId">
+				<option value="-1">---</option>
+				#foreach($n in $categories)
+	                   #recursiveCategoryOption($n $category.Parent.Id "&nbsp;&nbsp;")
+                #end	
+			</select>	
+		</p>
+		<p>
+			<label>&nbsp;</label>
+			<input type="submit" name="s" value="保存" class="btn"/>
+		</p>
+	</form>	
+</div>	

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+    xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	
+	<!-- ===========================================================-->
+	<!-- Velocity configurer.                                       -->
+	<!-- ===========================================================-->
+	<!--
+		This bean sets up the Velocity environment for us based on a root path for templates.
+		Optionally, a properties file can be specified for more control over the Velocity
+		environment, but the defaults are pretty sane for file based template loading.
+	-->
+	
+	<bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver" 
+       p:contentType="text/html; charset=GBK"  p:prefix="/WEB-INF/templates/" p:suffix=".vm" p:exposeSpringMacroHelpers="true" p:cache="true"
+       p:viewClass="org.springframework.web.servlet.view.velocity.VelocityLayoutView">
+    </bean>    
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+	    <property name="configLocation">
+			<value>/WEB-INF/conf/velocity.properties</value>
+		</property>
+		<property name="resourceLoaderPath">
+			<value>/</value>
+		</property>
+		<property name="velocityProperties">
+			<props>
+				<prop key="resource.loader">file</prop>
+				<prop key="file.resource.loader.class">org.apache.velocity.runtime.resource.loader.FileResourceLoader</prop>
+				<prop key="input.encoding">GBK</prop>
+				<prop key="output.encoding">GBK</prop>
+				<prop key="file.resource.loader.cache">true</prop>
+				<prop key="file.resource.loader.modificationCheckInterval">2</prop>
+				<prop key="velocimacro.library">macro_act.vm,macro_default.vm</prop>
+			</props>
+		</property>
+	</bean>
+	<context:component-scan base-package="com.act.web"/>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+	<!--加入拦截器--> 
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >   
+        <property name="interceptors">   
+            <list>   
+               <bean class="com.act.web.interceptor.LoginInterceptor"/> 
+            </list>   
+        </property> 
+    </bean> 
+	
+</beans>

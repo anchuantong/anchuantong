@@ -1,0 +1,63 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,label,textarea,p,blockquote,th,td{margin:0;padding:0;}
+fieldset,img{border:0;}
+ol,ul {list-style:none;}
+body{font-size:13px;font-family:'ËÎÌו';text-align:left;color:#FFF;line-height:180%;background-color: #51382C;}
+a{text-decoration:underline;color:#DDCEB6;}
+a:link,a:active,a:visited{color:#FFF;text-decoration:none;}
+.hackbox {border-top:1px solid transparent !important;margin-top:-1px !important;border-top:0px;margin-top:0px;clear:both;visibility:hidden;}
+a:hover{color:#000;}
+#main{width:100%;height:100%;margin:0 auto;text-align:left;}
+#menubar{width:100%;height:31px;background: url(images/bg.gif) repeat-x;}
+#menubar ul{float:left;}
+#menubar ul li{float:left;text-align:center;}
+#menubar ul li a{color:#DDCEB6;font-size:14px;display:block;height:31px;line-height:31px;width:70px;text-align:center;}
+#menubar ul li a.on{color:#FFF;font-weight:bold;background: url(images/marker.gif) no-repeat 50% 26px;}
+#menubar ul li a:hover{color:#FFF;font-weight:bold;background: url(images/marker.gif) no-repeat 50% 26px;}
+#menubar #searchbar{float:right;margin:0 20px 0 0;height:31px;line-height:31px;}
+#menubar #searchbar p{float:left;}
+.skd{border:1px solid #318200;width:200px;height:20px;margin:5px 0 0 0 !important;margin:4px 0 0 0;}
+.sbtn{margin:5px 0 0 0;}
+.dh{border-bottom:3px solid #73cf00;margin:0 20px;}
+#editbox{margin:5px 20px;}
+#editbox ul li{float:left;}
+#editbox ul li.lb{width:80px;}
+#editbox ul li.fd{width:858px;}
+.btn{background: url(images/button.gif);border:1px solid #573a29;height:24px;text-align:center;color:#FFF;}
+.ipt {margin-bottom: 9px;margin-top: 3px;display: block;background-color: #51382C;border: 1px solid #62483B;color: #EEE3D0;}
+.ipt{margin:0;}
+.error{font-weight:bold;color:red;}
+#content{width:90%;margin:30px auto;background-color: #573c2f;}
+.uarticles{}
+.uarticles li{float:left;20%;}
+.uarticles li.t{width:60%;}
+#login_box{width:500px;margin:30px auto;background-color: #573c2f;}
+#login_box  ul{clear:both;margin:15px 0;}
+#login_box  li{float:left;}
+#login_box  li.loginl{width:100px;text-align:right;}
+#login_box  li.loginr{width:380px;}
+#pcontent{margin:10px 0 0 0;padding:0}
+#pcontent #pleft{background:#483126 url(images/lb.gif);width:20%;float:left;margin-left:10px;}
+#pcontent #pleft h2{border-bottom: 1px solid #644737;display: block;margin:22px 3%;text-decoration: none;width: 94%; height: 30px;}
+ul.dhlist{margin:22px 3%;padding-bottom:20px;}
+ul.dhlist a{color:#DDCEB6;font-size:14px;display:block;height:31px;line-height:31px;width:100%;text-align:left;}
+ul.dhlist a.on{color:#FFF;font-weight:bold;background: url(images/marker.gif) no-repeat 5px 26px;}
+ul.dhlist a:hover{color:#FFF;font-weight:bold;background: url(images/marker.gif) no-repeat 5px 26px;}
+#pcontent #pright{float:right;margin-right:10px;width:74%;background:url(images/rb.gif);}
+#pcontent #pright ul#list{clear:both;border-bottom: 1px dashed #644737;width:96%;margin-left:15px;}
+#pcontent #pright ul#list a{color:#DDCEB6;}
+#pcontent #pright ul#list p.t{background: url(images/tb.gif) no-repeat 0 5px;border-bottom: 1px solid #644737;margin:0;padding-left:18px;text-decoration: none;height: 30px;line-height: 30px;color:#e8dac1;font-weight:bold;font-size:14px;}
+#pcontent #pright ul#list a:hover{color:#FFF;}
+#pcontent #pright ul#list p.d{text-indent:2em;padding:5px 0;margin:5px 0 10px 0}
+#pcontent #pright ul#list li{float:left;}
+#pcontent #pright .dt{border-bottom: 1px solid #644737;text-align:center;margin:12px 20px 0 20px;padding:0 0 10px 0;height: 36px;line-height: 36px;font-weight:bold;font-size:14px;}
+#pcontent #pright .detail{margin:5px 20px;}
+#pcontent #pright .detail p{text-indent:2em;padding:5px 0;}
+#pcontent #pright .detail1{margin:5px 20px;float:left;width:71%;}
+#pcontent #pright .detail1 p{text-indent:2em;padding:5px 0;}
+#pcontent #pright .part_dh{float:right;width:22%;margin:5px 0 ;}
+#pcontent .part_dh h3{border-bottom: 1px solid #644737;display: block;margin:0;text-decoration: none;width: 90%; height: 30px;}
+
+/* footer */
+#footer {font-size: 12px;text-decoration: none;color: #937565;display: block;float: left;text-align: center;background-color: #301B11;margin: 0;padding: 0;border-top: 20px solid #51382C;width: 100%;voice-family: "\"}\"";voice-family: inherit;}
+#footer  a:link, #footer  a:visited{font-size: 12px;text-decoration: none;color: #937565;}
+

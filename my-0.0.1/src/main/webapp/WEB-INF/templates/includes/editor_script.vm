@@ -1,0 +1,30 @@
+<script type="text/javascript">
+function insertHtml(html) {
+   var oEditor = FCKeditorAPI.GetInstance('$body_name');
+   oEditor.InsertHtml(html);
+}
+
+function insertImg(url,width,height) {
+    var oEditor = FCKeditorAPI.GetInstance('$body_name');
+    if ( oEditor.EditMode == FCK_EDITMODE_WYSIWYG )
+    {
+        var oImg = oEditor.CreateElement( 'IMG' ) ;
+        oImg.src = url ;
+        oImg.width = width ;
+        oImg.height = height ;
+        oImg.border = 0 ;
+        //oEditor.Selection.SelectNode(oImg)
+        //var oCommand = oEditor.Commands.GetCommand( "Image" );
+        //oCommand.Execute();
+    }
+    else
+        alert( 'You must be on WYSIWYG mode!' ) ;
+}
+</script>
+
+
+
+
+#if(!$_init)
+    #set ($_init = true)
+#end
