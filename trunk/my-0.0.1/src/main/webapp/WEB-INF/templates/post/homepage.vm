@@ -1,0 +1,21 @@
+<div id="cats">
+<ul class="t">
+	<li class="ft">论坛</li>
+	<li class="tt">主题</li>
+	<li class="at">文章</li>
+	<li class="nt">最新文章</li>
+</ul>	
+#foreach($n in $categories)
+<ul>
+	<li>
+		$n.Name
+	    <br/>
+		#foreach($child in $n.Children)
+			$child.Name
+		#end	
+	</li>
+	<li>ff</li>
+	<li>ffff</li>
+</ul>	
+#end
+</div>

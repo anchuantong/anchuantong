@@ -1,0 +1,52 @@
+#set($root=$request.getContextPath())
+#set($parent=$category.Parent)
+#if(!$parent)
+	#set($parent=$category)
+#end	
+<div id="pcontent">
+         <div id="pleft">
+			<h2>$parent.Name</h2>
+			#if($parent.Children&&$parent.Children.size()>0)	
+             <ul class="dhlist">
+			 #foreach($n in $parent.Children)	
+              <li><a href="$root/portal/article/index/$n.Id"#if($n.Id==$category.Id) class="on"#end>$n.Name</a></li>
+             #end 
+             </ul> 
+			#end 
+          </div>
+          <div id="pright">
+			<p class="dt">$article.Title</p>
+			#if($parts.size()>1)
+				
+			<div class="part_dh">
+				  <h3>ÎÄÕÂµ¼º½</h3>
+				  <ul class="dhlist">
+				#set($i=0)	
+			      #foreach($n in $parts)
+					#if($util.isNotEmpty("$!n.Title"))
+						#set($title="$!n.Title")
+					#else
+						#set($index=$i + 1)
+					    #set($title="µÚ$indexÒ³")
+					#end	
+					#set($article_path="${i}_$article.Id")
+					#if($i==0)
+						#set($article_path="$article.Id")
+					#end	
+					<li><a href="$article_path"#if($part==$i) class="on"#end>$title</a></li>
+				#set($i=$i+1)		
+			  #end
+				  </ul>	
+			</div>
+			<div class="detail1">
+			       $body
+			</div>
+			<div class="hackbox"></div>
+			#else
+				<div class="detail">
+			       $body
+			   </div>
+			#end	
+          </div>
+          <div class="hackbox"></div>
+</div>

@@ -1,0 +1,17 @@
+      <div id="content">
+         <div id="left">
+             <ul>
+              <li><a href="">生活</a></li>
+              <li class="on"><a href="">技术</a></li>
+              <li><a href="">技术</a></li>
+              <li><a href="">技术</a></li>
+             </ul> 
+          </div>
+          <div id="middle">
+              
+          </div>
+          <div id="right">
+              
+          </div>
+          <div class="hackbox"></div>
+      </div>

@@ -1,0 +1,16 @@
+#set($root=$request.getContextPath())
+<div id="pcontent">
+         <div id="pleft">
+             <ul>
+              <li><a href="">生活</a></li>
+              <li class="on"><a href="">技术</a></li>
+              <li><a href="">技术</a></li>
+              <li><a href="">技术</a></li>
+             </ul> 
+          </div>
+          <div id="pright">
+            
+          </div>
+          <div class="hackbox"></div>
+      </div>
+

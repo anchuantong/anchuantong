@@ -1,0 +1,22 @@
+#set($root=$request.getContextPath())
+<div id="login_box">
+	   <form name="form1" id="form1" method="POST" action="?" >
+		#if($error)
+			<p class="error">$error</p>
+		#end	
+		<ul>
+		  <li class="loginl">”√ªß√˚£∫</li>	
+		  <li class="loginr"><input type="text" name="username"  class="ipt" size="30"/></li>
+		</ul> 
+		<ul>
+		  <li class="loginl">√‹¬Î£∫</li>	
+		  <li class="loginr"><input type="password" name="password"   class="ipt" size="30"/></li>
+		</ul> 
+		<ul>  
+		  <li class="loginl">&nbsp;</li>
+		  <li class="loginr"><input type="submit" name="s" value="µ«¬º" class="btn"/></li>
+		</ul>  
+		<div class="hackbox"></div>
+	   </form>
+</div>	
+
