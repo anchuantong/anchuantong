@@ -67,7 +67,8 @@ public class ArticleBoImpl extends BaseBoImpl implements ArticleBo {
 		return getDao().count(sql);
 	}
 
-	public List<Article> findArticleByCat(Category cat, boolean approved) {
+	@SuppressWarnings("unchecked")
+        public List<Article> findArticleByCat(Category cat, boolean approved) {
 		String sql = "from Article where category IN ( " + cat.getRecursiveIds() + " ) ";
 		if (approved) {
 			sql += " and published=1";

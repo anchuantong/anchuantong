@@ -1,5 +1,5 @@
 
-package com.act.web;
+package com.act.web.action.view;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import com.act.db.model.ArticlePart;
 import com.act.db.model.Category;
 import com.act.util.PageBuilder;
 import com.act.util.StringUtil;
+import com.act.web.action.manage.BaseController;
 
 /**
  * @author an_chuantong

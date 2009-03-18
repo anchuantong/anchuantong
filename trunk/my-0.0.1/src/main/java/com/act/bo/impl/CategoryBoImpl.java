@@ -7,7 +7,6 @@ import org.hibernate.HibernateException;
 
 import com.act.bo.CategoryBo;
 import com.act.db.model.Category;
-import com.act.db.model.User;
 
 
 /**
@@ -17,7 +16,8 @@ import com.act.db.model.User;
 
 public class CategoryBoImpl extends BaseBoImpl implements CategoryBo {
 
-	public List<Category> loadRootCategories(String username){
+	@SuppressWarnings("unchecked")
+        public List<Category> loadRootCategories(String username){
 		List<Integer> idsList=getDao().findList("select id from Category where level=1 and username=? order by pos asc",new Object[]{username},Boolean.TRUE);
 		List<Category> list=new ArrayList<Category>();
 		if(idsList!=null&&idsList.size()>0){
@@ -28,7 +28,8 @@ public class CategoryBoImpl extends BaseBoImpl implements CategoryBo {
 		return list;
 		
 	}
-	public List<Category> loadRootCategories(){
+	@SuppressWarnings("unchecked")
+        public List<Category> loadRootCategories(){
 		List<Integer> idsList=getDao().findList("select id from Category where level=1  order by pos asc",Boolean.TRUE);
 		List<Category> list=new ArrayList<Category>();
 		if(idsList!=null&&idsList.size()>0){
