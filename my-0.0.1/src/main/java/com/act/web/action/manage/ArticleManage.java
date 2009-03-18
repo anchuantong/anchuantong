@@ -106,6 +106,38 @@ public class ArticleManage extends BaseController {
 		
 		return "user/article/edit";
 	}
+	
+	@RequestMapping
+	public String addSmall(Article article,ArticleForm form , ModelMap model, @ModelAttribute("userSession") User user) {
+		Article articlePo = null;
+		if (article != null && article.getId() != null && article.getId() > 0) {
+			articlePo = articleBo.loadArticle(article.getId());
+		}
+		if (articlePo == null) {
+			articlePo = article;
+			articlePo.setCreated(new Date());
+			articlePo.setCreator(user.getUsername());
+			articlePo.setHits(0);
+		} else {
+			articlePo.setTitle(article.getTitle());
+		}
+		Integer catId=form.getCatId();
+		if (catId != null && catId > 0) {
+			Category category = categoryBo.loadCategory(catId);
+			if (category != null) {
+				articlePo.setCategory(category);
+			}
+		}
+		user = userBo.findUser(user.getUsername());
+		articlePo.setModifed(new Date());
+		articlePo.setModifer(user.getUsername());
+		boolean succ = articleBo.saveArticleSmall(articlePo);
+		if (succ) {
+			return "success";
+		}
+		
+		return "user/article/add_small";
+	}
 
 	@RequestMapping
 	public String delete(@RequestParam("id") Integer id, @ModelAttribute("userSession") User user) {

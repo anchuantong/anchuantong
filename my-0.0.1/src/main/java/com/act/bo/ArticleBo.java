@@ -32,6 +32,8 @@ public interface ArticleBo {
 	 */
 	public boolean saveArticle(Article article,String body,String partTitle,int part);
 	
+	public boolean saveArticleSmall(Article article);
+	
 	public void deleteArticle(Article article);
 
 	public Article loadArticle(Integer id);
@@ -50,4 +52,6 @@ public interface ArticleBo {
 	public void addPart(Article article);
 	
 	public void deletePart(Article article,int part);
+
+	
 }

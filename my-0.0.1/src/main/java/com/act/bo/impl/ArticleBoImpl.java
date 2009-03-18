@@ -31,9 +31,7 @@ public class ArticleBoImpl extends BaseBoImpl implements ArticleBo {
 
 	public boolean saveArticle(Article article, String body,String partTitle, int part) {
 		article.setDescription(StringUtil.summarize(StringUtil.html2txt(body), 150));
-
 		getDao().save(article);
-
 		List<ArticlePart> parts = article.getParts();
 		ArticlePart articlePart = null;
 		if (parts == null) {
@@ -51,6 +49,11 @@ public class ArticleBoImpl extends BaseBoImpl implements ArticleBo {
 		articlePart.setTitle(partTitle);
 		getDao().save(articlePart);
 		getDao().update(article);
+		return true;
+	}
+	
+	public boolean saveArticleSmall(Article article){
+		getDao().save(article);
 		return true;
 	}
 
