@@ -75,4 +75,5 @@
 	<bean id="userBo" class="com.act.bo.impl.UserBoImpl"/>
 	<bean id="pictureBo" class="com.act.bo.impl.PictureBoImpl"/>
 	<bean id="articleBo" class="com.act.bo.impl.ArticleBoImpl"/>
+	<bean id="specialBo" class="com.act.bo.impl.SpecialBoImpl"/>
 </beans>
