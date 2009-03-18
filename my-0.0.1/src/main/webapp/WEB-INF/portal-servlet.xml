@@ -41,7 +41,7 @@
 			</props>
 		</property>
 	</bean>
-	<context:component-scan base-package="com.act.web"/>
+	<context:component-scan base-package="com.act.web.action"/>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 	<!--加入拦截器--> 
