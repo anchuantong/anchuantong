@@ -1,0 +1,32 @@
+#set($root=$request.getContextPath())
+
+<div id="content">
+	<form name="form1" id="form1" method="POST" action="addSmall">
+		#inputHidden(["back_url","index"])
+		#inputHidden(["id","$!article.Id"])
+		<p>
+			<label>标题：</label>
+			<input type="text" name="title"  class="ipt" size="50" value="$!article.Title"/>	
+		</p>	
+		
+		<p>
+			<label>内容：</label><br/>
+			<textarea type="text" name="description" >$!article.Description</textarea>
+		</p>	
+		
+		<p>
+			<label>对应分类：</label><br/>
+			<select name="catId">
+				<option value="-1">---</option>
+				#foreach($n in $categories)
+					#recursiveCategoryOption($n $article.Category.Id "&nbsp;&nbsp;")
+                #end	
+			</select>	
+		</p>
+		<p>
+			<label>&nbsp;</label>
+			<input type="submit" name="s" value="保存" class="btn"/>
+			&nbsp;&nbsp;<input type="button" name="s" value="返回" class="btn" onclick="location.href='index'"/>
+		</p>
+	</form>	
+</div>	
