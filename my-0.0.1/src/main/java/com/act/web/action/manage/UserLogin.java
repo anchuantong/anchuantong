@@ -1,5 +1,5 @@
 
-package com.act.web;
+package com.act.web.action.manage;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;

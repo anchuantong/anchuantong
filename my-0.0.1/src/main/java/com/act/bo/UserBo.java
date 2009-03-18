@@ -1,7 +1,5 @@
 package com.act.bo;
 
-import java.util.List;
-
 import com.act.db.model.User;
 
 /**

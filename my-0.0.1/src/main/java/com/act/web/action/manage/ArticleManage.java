@@ -1,5 +1,5 @@
 
-package com.act.web;
+package com.act.web.action.manage;
 
 import java.util.Date;
 

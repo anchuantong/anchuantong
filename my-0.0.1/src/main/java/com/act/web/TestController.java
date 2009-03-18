@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.act.db.dao.CategoryDao;
 import com.act.db.model.Category;
 import com.act.db.model.User;
+import com.act.web.action.manage.BaseController;
 
 @Controller
 @SessionAttributes("userSession")
