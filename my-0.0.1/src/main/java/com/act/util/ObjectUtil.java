@@ -2,6 +2,7 @@
 package com.act.util;
 
 import java.beans.IndexedPropertyDescriptor;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
@@ -125,15 +126,29 @@ public class ObjectUtil {
 	 * 
 	 * @param before
 	 * @param after
-	 * @throws Exception
+	 * 
 	 */
-	public void copyObject(Object before, Object after) throws Exception {
-		PropertyDescriptor[] beforeProps = Introspector.getBeanInfo(before.getClass()).getPropertyDescriptors();
+	public void copyObject(Object before, Object after) {
+		PropertyDescriptor[] beforeProps=null;
+                try {
+	                beforeProps = Introspector.getBeanInfo(before.getClass()).getPropertyDescriptors();
+                } catch (IntrospectionException e) {
+	                e.printStackTrace();
+                }
 
 		for (int i = 0; i < beforeProps.length; i++) {
 			String propname = beforeProps[i].getName();
 			Method getter = beforeProps[i].getReadMethod();
-			Object propvalue = getter.invoke(before, new Object[] {});
+			Object propvalue=null;
+                        try {
+	                        propvalue = getter.invoke(before, new Object[] {});
+                        } catch (IllegalArgumentException e) {
+	                        e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+	                        e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+	                        e.printStackTrace();
+                        }
 			Class propclass = getter.getReturnType();
 			if (propvalue != null) {
 				propname = propname.substring(0, 1).toUpperCase() + propname.substring(1);

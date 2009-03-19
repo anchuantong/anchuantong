@@ -1,0 +1,6 @@
+<style>
+	.mlist{}
+	.mlist li span.title{width:400px;}
+</style>	
+$screen_content
+ 
