@@ -27,5 +27,10 @@ public class BaseController {
 	public VelocityUtil setUtil(){
 		return VelocityUtil.getInstance();
 	}
+	
+	@ModelAttribute("layout")
+	public String setLayout(){
+		return "layout/layout.vm";
+	}
 
 }

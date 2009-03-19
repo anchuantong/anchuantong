@@ -24,7 +24,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	private UserBo userBo;
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		if (request.getRequestURI().indexOf("/user/") > -1) {
+		if (request.getRequestURI().indexOf("/user/") > -1 || request.getRequestURI().indexOf("/special/") > -1) {
 			UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, Config.SESSION_NAME);
 			if (userSession == null) {
 				Cookie cookie = WebUtils.getCookie(request, "AN_CLIENT_DATA");
@@ -41,8 +41,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 				}
 				if (userSession == null) {
-					response.sendRedirect(request.getContextPath() + "/portal/login");
-					return false;
+					if (request.getRequestURI().indexOf("/special/") > -1) {
+                                               User user=new User();
+                                               user.setUsername("anonymous");
+                                               userSession = user;
+                                               WebUtils.setSessionAttribute(request, Config.SESSION_NAME, userSession);
+					} else {
+						response.sendRedirect(request.getContextPath() + "/portal/login");
+						return false;
+					}
 				}
 			}
 		}

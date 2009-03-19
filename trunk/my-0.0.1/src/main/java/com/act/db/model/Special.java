@@ -61,6 +61,18 @@ public class Special implements Serializable {
 	@OneToMany
 	@JoinColumn(name = "special", unique = false)
 	private List<SpecialStyle> styles;
+	
+	private Integer category;
+
+	
+        public Integer getCategory() {
+        	return category;
+        }
+
+	
+        public void setCategory(Integer category) {
+        	this.category = category;
+        }
 
 	public Integer getId() {
 		return id;

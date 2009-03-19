@@ -25,5 +25,12 @@
     <mapping class="com.act.db.model.Picture"/>
     <mapping class="com.act.db.model.Article"/>
     <mapping class="com.act.db.model.ArticlePart"/>
+    <mapping class="com.act.db.model.Special"/>
+    <mapping class="com.act.db.model.SpecialModule"/>
+    <mapping class="com.act.db.model.SpecialStyle"/>
+    <mapping class="com.act.db.model.SpecialModuleBody"/>
+    <mapping class="com.act.db.model.SpecialModuleList"/>
+    <mapping class="com.act.db.model.SpecialArticle"/>
+    <mapping class="com.act.db.model.SpecialArticlePart"/>
   </session-factory>
 </hibernate-configuration>

@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "special")
+@Table(name = "special_style")
 public class SpecialStyle implements Serializable {
 
 	/**
