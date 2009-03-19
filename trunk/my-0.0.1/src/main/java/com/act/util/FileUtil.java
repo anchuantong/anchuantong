@@ -111,6 +111,9 @@ public class FileUtil {
 		if(in==null){
 			return false;
 		}
+		if(!outFile.exists()){
+			outFile.getParentFile().mkdirs();
+		}
 		try {
 			OutputStream out = null;
 			try {
