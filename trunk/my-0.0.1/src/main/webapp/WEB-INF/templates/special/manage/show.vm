@@ -1,0 +1,27 @@
+<form name="form1" id="form1" method="POST" action="edit">
+		#inputHidden(["back_url","index"])
+		#inputHidden(["id","$!special.Id"])
+		<p>
+			<label>标题：</label>
+			<input type="text" name="title"  class="ipt" size="50" value="$!special.Title"/>	
+		</p>	
+		<p>
+			<label>类型：</label>
+			
+				<select name="category" id="category">
+					#foreach($n in $types)	
+						<option value="$n.value"#if($!special.category==$n.value) selected="selected"#end>$n</option>
+					#end		
+				</select>	
+			
+		</p>	
+		<p>
+			<label>简单说明：</label><br/>
+			<textarea type="text" name="description" >$!special.description</textarea>
+		</p>	
+		<p>
+			<label>&nbsp;</label>
+			<input type="submit" name="s" value="保存" class="btn"/>
+			&nbsp;&nbsp;<input type="button" name="s" value="返回" class="btn" onclick="location.href='index'"/>
+		</p>
+</form>	

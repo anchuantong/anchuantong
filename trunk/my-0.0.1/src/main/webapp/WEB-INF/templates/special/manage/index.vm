@@ -1,0 +1,16 @@
+<div id="add_new"><a href="show">增加</a></div>
+<ul class="mlist">
+#foreach($n in $list)
+	<li>
+		<span class="title">$n.Title</span>
+		<span class="edit">
+			[<a href="show?id=$n.Id">编辑</a>]
+			[<a href="delete?id=$n.Id" onclick="return confirm('确认删除吗？')">删除</a>]
+			[<a href="listArticle?specialId=$n.Id" >文章列表</a>]
+			[<a href="showArticle?specialId=$n.Id">增加文章</a>]
+			[<a href="upload?specialId=$n.Id">上传图片</a>]
+			[<a href="updatePortal?specialId=$n.Id">个性化定制</a>]
+		</span>
+	</li>
+#end	
+</ul>

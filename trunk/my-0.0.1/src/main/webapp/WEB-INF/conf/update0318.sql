@@ -10,6 +10,7 @@ CREATE TABLE  `my`.`special` (
   `published` tinyint(1) unsigned default '0',
   `hits` int(10) unsigned default '0',
   `logo` varchar(80) default NULL,
+  'category' int(10) unsigned default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
