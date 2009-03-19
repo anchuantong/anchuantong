@@ -50,7 +50,18 @@ public class CategoryBoImpl extends BaseBoImpl implements CategoryBo {
 	  
 	}
 	
-	public boolean saveCategory(Category category,Integer parentId){
+	public boolean saveCategory(Category categoryPo,Category category,Integer parentId,String username){
+		if(category!=null&&category.getId()!=null){
+			categoryPo=loadCategory(category.getId());
+			categoryPo.setName(category.getName());
+			categoryPo.setLevel(category.getLevel());
+			categoryPo.setPassword(category.getPassword());
+			categoryPo.setPos(category.getPos());
+			categoryPo.setType(category.getType());
+		}else{
+			categoryPo=category;
+		}
+		categoryPo.setUsername(username);
 		category.setLevel(1);
 		if(parentId>0){
 			Category parent=loadCategory(parentId);

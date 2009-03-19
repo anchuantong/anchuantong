@@ -48,19 +48,7 @@ public class CategoryManage extends BaseController {
 	@RequestMapping
 	public String edit(Category category, @RequestParam("parentId") Integer parentId,ModelMap model,@ModelAttribute("userSession") User user){
 		Category categoryPo=null;
-		if(category!=null&&category.getId()!=null){
-			categoryPo=categoryBo.loadCategory(category.getId());
-			categoryPo.setName(category.getName());
-			categoryPo.setLevel(category.getLevel());
-			categoryPo.setPassword(category.getPassword());
-			categoryPo.setPos(category.getPos());
-			categoryPo.setType(category.getType());
-		}else{
-			categoryPo=category;
-		}
-		categoryPo.setUsername(user.getUsername());
-		
-		boolean succ=categoryBo.saveCategory(categoryPo, parentId);
+		boolean succ=categoryBo.saveCategory(categoryPo, categoryPo, parentId, user.getUsername());
 		if(succ){
 			return "success";
 		}
