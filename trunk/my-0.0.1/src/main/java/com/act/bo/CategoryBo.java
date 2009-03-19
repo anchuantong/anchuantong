@@ -19,7 +19,7 @@ public interface CategoryBo {
 	
 	public Category loadPicCategory(String username);
 	
-	public boolean saveCategory(Category category,Integer parentId);
+	public boolean saveCategory(Category categoryPo,Category category,Integer parentId,String username);
 
 	public boolean deleteCategory(Integer id, String username);
 	
