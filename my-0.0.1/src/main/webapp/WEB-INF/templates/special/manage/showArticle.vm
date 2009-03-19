@@ -1,0 +1,50 @@
+#set($root=$request.getContextPath())
+#set($imgs=$request.getContextPath())
+#if($article&&$article.Parts)
+  #set($partSize=$article.Parts.size())
+  #if($partSize>$!part)
+       #set($articlePart=$!article.Parts.get($!part))
+  #end
+#else
+	 #set($partSize=0)
+#end	
+$!special.Title$articlePart
+<div id="content">
+	<form name="form1" id="form1" method="POST" action="editArticle">
+		#inputHidden(["id","$!article.Id"])
+		#inputHidden(["part","$!part"])
+		#inputHidden(["specialId","$!special.Id"])
+		<p>
+			<label>标题：</label>
+			<input type="text" name="title"  class="ipt" size="50" value="$!article.Title"/>	
+		</p>	
+		#if($partSize>0)
+		<p>
+			<label>本页标题：</label>
+			<input type="text" name="partTitle"  class="ipt" size="50" value="$!articlePart.Title"/>	
+		</p>	
+		<p>
+			#foreach($n in [1..$partSize])
+					#set($p=$n - 1)
+					#if($part==$p)
+						<b>$n</b>
+					#else	
+					  [<a href="showArticle?id=$article.Id&part=$p&specialId=$special.Id">$n</a>]
+					#end
+					#end	
+			[<a href="addPart?id=$article.Id&specialId=$special.Id">增加一页</a>]
+			[<a href="deletePart?id=$article.Id&part=$!part&specialId=$special.Id">删除当前页</a>]
+		</p>
+		#end
+		<p>
+			<label>内容：</label><br/>
+			<textarea type="text" name="description" >$!articlePart.Body</textarea>
+		</p>	
+		<p>
+			<label>&nbsp;</label>
+			<input type="submit" name="s" value="保存" class="btn"/>
+			&nbsp;&nbsp;<input type="button" name="s" value="返回" class="btn" onclick="location.href='index'"/>
+		</p>
+	</form>	
+</div>	
+#showEditorHtml(["Description"] "EXPOPO" 500 500)

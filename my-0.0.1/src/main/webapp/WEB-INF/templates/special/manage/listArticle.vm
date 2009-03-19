@@ -1,0 +1,17 @@
+<div id="add_new"><a href="showArticle?specialId=$special.Id">Ôö¼Ó</a></div>
+<ul class="mlist">
+#foreach($n in $list)
+	<form name="form1" method="">
+	<li>
+		<span class="title">$n.Title</span>
+		<span class="edit">
+			#inputHidden(["back_url","/special/manage/listArticle?specialId=$special.Id"])
+			
+			[<a href="showArticle?id=$n.Id&specialId=$special.Id">±à¼­</a>]
+			[<a href="deleteArticle?id=$n.Id&specialId=$special.Id" onclick="return confirm('È·ÈÏÉ¾³ýÂð£¿')">É¾³ý</a>]
+			
+       </span>
+	</li>
+	</form>
+#end	
+</ul>
