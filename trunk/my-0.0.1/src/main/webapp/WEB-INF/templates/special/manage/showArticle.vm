@@ -10,7 +10,7 @@
 #end	
 $!special.Title$articlePart
 <div id="content">
-	<form name="form1" id="form1" method="POST" action="editArticle">
+	<form name="form1" id="form1" method="POST" action="editArticle" enctype="multipart/form-data">
 		#inputHidden(["id","$!article.Id"])
 		#inputHidden(["part","$!part"])
 		#inputHidden(["specialId","$!special.Id"])
@@ -40,6 +40,11 @@ $!special.Title$articlePart
 			<label>ÄÚÈÝ£º</label><br/>
 			<textarea type="text" name="description" >$!articlePart.Body</textarea>
 		</p>	
+		<p>
+			<label>Í¼Æ¬£º</label><br/>
+			<input type="file" name="upload"  class="ipt" size="50"/>	
+		</p>	
+			
 		<p>
 			<label>&nbsp;</label>
 			<input type="submit" name="s" value="±£´æ" class="btn"/>
