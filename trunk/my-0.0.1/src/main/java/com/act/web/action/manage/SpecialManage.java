@@ -119,9 +119,10 @@ public class SpecialManage extends BaseController {
 			String extension = FileUtil.getExtension(upload.getOriginalFilename());
 			if (ArrayUtil.contains(ImageUtil.EXTENSIONS, extension)) {
 				String filename = FileUtil.getUniqueFileName() + "." + extension;
+				//String filename = specialArticleForm.getId()+ "." + extension;
 				File file = new File(constant.getUploadPath(), filename);
 				FileUtil.copy(in, file);
-				
+				specialArticleForm.setLogo(filename);
 			}
 			log.debug("extension:" + upload.getOriginalFilename());
 		}

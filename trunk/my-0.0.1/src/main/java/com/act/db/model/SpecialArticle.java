@@ -55,13 +55,17 @@ public class SpecialArticle {
         
         private boolean published;
         
-        @OneToMany
+        private String logo;
+        
+	@OneToMany
         @Cascade(CascadeType.DELETE_ORPHAN)
         @IndexColumn(name="pos")
         @JoinColumn(name = "article", unique = false,insertable=true) 
         @OrderBy(clause="pos asc")
         // @JoinTable(inverseJoinColumns=@JoinColumn(name="article"))
         private List<SpecialArticlePart> parts;
+        
+        
 
 
 	
@@ -211,13 +215,19 @@ public class SpecialArticle {
         public Special getSpecial() {
         	return special;
         }
-
-
-
 	
         public void setSpecial(Special special) {
         	this.special = special;
         }
+        
+        public String getLogo() {
+        	return logo;
+        }
+
+        public void setLogo(String logo) {
+        	this.logo = logo;
+        }
+
         
         public Object clone() {
 		try {
