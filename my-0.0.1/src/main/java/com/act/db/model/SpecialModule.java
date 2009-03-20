@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OrderBy;
 
 @Entity
@@ -47,7 +49,14 @@ public class SpecialModule implements Serializable {
 	
         private Integer type;
 
-	
+        @ManyToOne
+	@JoinColumn(name="parent")
+        private SpecialModule parent;
+        
+        @OneToMany
+        @JoinColumn(name = "parent", unique = false) 
+        @OrderBy(clause = "pos asc")
+        private List<Category> children;
 
 	public Integer getId() {
         	return id;
@@ -125,5 +134,29 @@ public class SpecialModule implements Serializable {
 
         public void setType(Integer type) {
         	this.type = type;
+        }
+
+
+	
+        public SpecialModule getParent() {
+        	return parent;
+        }
+
+
+	
+        public void setParent(SpecialModule parent) {
+        	this.parent = parent;
+        }
+
+
+	
+        public List<Category> getChildren() {
+        	return children;
+        }
+
+
+	
+        public void setChildren(List<Category> children) {
+        	this.children = children;
         }
 }
