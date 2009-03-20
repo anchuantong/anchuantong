@@ -21,16 +21,17 @@ public class SpecialModuleList implements Serializable {
         @Id
 	@GeneratedValue
 	private Integer id;
-        
-        private String title;
-        
-        private String href;
-        
-        private String picture;
-        
+     
         private String created;
         
         private int pos;
+        
+        private Integer objectId;
+        
+        
+
+	private Integer objectType;
+        
         
         @ManyToOne
 	@JoinColumn(name="module")
@@ -47,35 +48,6 @@ public class SpecialModuleList implements Serializable {
         }
 
 	
-        public String getTitle() {
-        	return title;
-        }
-
-	
-        public void setTitle(String title) {
-        	this.title = title;
-        }
-
-	
-        public String getHref() {
-        	return href;
-        }
-
-	
-        public void setHref(String href) {
-        	this.href = href;
-        }
-
-	
-        public String getPicture() {
-        	return picture;
-        }
-
-	
-        public void setPicture(String picture) {
-        	this.picture = picture;
-        }
-
 	
         public String getCreated() {
         	return created;
@@ -104,6 +76,28 @@ public class SpecialModuleList implements Serializable {
 	
         public void setModule(SpecialModule module) {
         	this.module = module;
+        }
+
+        public Integer getObjectId() {
+        	return objectId;
+        }
+
+
+	
+        public void setObjectId(Integer objectId) {
+        	this.objectId = objectId;
+        }
+
+
+	
+        public Integer getObjectType() {
+        	return objectType;
+        }
+
+
+	
+        public void setObjectType(Integer objectType) {
+        	this.objectType = objectType;
         }
 
 }
