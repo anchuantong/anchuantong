@@ -11,10 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OrderBy;
 
+/**
+ * <h3>专题模块</h3>
+ * <span>打算采用DOM树</span>
+ * <span>系统设置几个默认模块，可以由用户拖出进行修改</span>
+ * @author anchuantong
+ *
+ */
 @Entity
 @Table(name = "special_module")
 public class SpecialModule implements Serializable {
