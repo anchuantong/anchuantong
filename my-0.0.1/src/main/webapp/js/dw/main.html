@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>无标题文档</title>
+<script src="dreamweaver .js"></script>
+</head>
+<script>
+function addLoadEvent(func) {
+      var oldonload = window.onload;
+      if (typeof window.onload != 'function') {
+        window.onload = func;
+      } else {
+        window.onload = function() {
+          oldonload();
+          func();
+        }
+      }
+}
+function init(){
+ var dw=new Dreamweaver("content",1024);
+}
+addLoadEvent(init)
+</script>
+<body>
+<div id="main1" style="float:left;border-right:1px solid #ccc;" >
+<iframe width="80%" height="100%" id="content" name="content" frameborder="0"></iframe>
+</div>
+<div id="main2" style="float:left">
+<iframe width="80%" height="100%" id="desgin" name="desgin" src="desgin.html" frameborder="0"></iframe>
+</div>
+</body>
+
+</html>

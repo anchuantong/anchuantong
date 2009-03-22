@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>无标题文档</title>
+<style type="text/css">
+ *{margin:0;padding:0;}
+fieldset,img{border:0;}
+ol,ul {list-style:none;}
+#menu{width:198px;border:1px solid #ccc;border-right:0;margin-left:6px;}
+ul.menu_t{width:198px;height:24px;}
+ul.menu_t li{float:left;background:#e8e8e8;width:65px;height:24px;line-height:24px;text-align:center;border-right:1px solid #ccc;border-bottom:1px solid #ccc;}
+#menu_box{border-right:1px solid #ccc;}
+#menu_box ul li{float:left;}
+#menu_box #box_html li{width:60px;height:40px;line-height:40px;text-align:center;}
+#desgin{clear:both;width:198px;border:1px solid #ccc;margin-left:6px;margin-top:15px;}
+</style>
+<script>
+function beginEdit(element){
+	document.getElementById("desgin").style.display="block";
+	document.getElementById("domId").value=element.id;
+	alert(element.id)
+}
+
+ function addDom(domName){
+     var element=parent.dw.create(domName,"");
+     element.innerHTML="一个"+domName+"节点";
+     element.onclick=function(){
+    	 beginEdit(this);
+     }
+     parent.dw.append(element);
+	 return false;
+ } 
+
+ function updateStyle(){
+
+ }
+</script>
+</head>
+<body>
+<div id="menu">
+     <ul class="menu_t">
+          <li>HTML</li>
+          <li>多媒体</li>
+          <li>专题</li>
+     </ul>
+     <div id="menu_box">
+         <ul id="box_html">
+             <li><a href="#" onclick="return addDom('div')">div</a></li>
+             <li><a href="#" onclick="return addDom('p')">p</a></li>
+             <li><a href="#" onclick="return addDom('h1')">h1</a></li>
+             <li><a href="#" onclick="return addDom('h2')">h2</a></li>
+             <li><a href="#" onclick="return addDom('h3')">h3</a></li>
+         </ul>
+         
+     </div>
+</div>
+<div id="desgin" style="display:none;">
+<form name="desgin_form" id="desgin_form">
+      <input type="hidden" name="domId" id="domId" value="" />
+      <span>宽度:<input type="hidden" name="width" id="width" value="" />px</span>
+      <span>高度:<input type="hidden" name="height" id="height" value="" />px</span>
+      <input type="button" value="修改" onclick="updateStyle()"/>
+</form>      
+</div>
+
+</body>
+</html>
