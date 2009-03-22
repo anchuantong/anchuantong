@@ -9,7 +9,7 @@
 			[<a href="listArticle?specialId=$n.Id" >文章列表</a>]
 			[<a href="showArticle?specialId=$n.Id">增加文章</a>]
 			[<a href="upload?specialId=$n.Id">上传图片</a>]
-			[<a href="updatePortal?specialId=$n.Id">个性化定制</a>]
+			[<a href="showPage?specialId=$n.Id">个性化定制</a>]
 		</span>
 	</li>
 #end	

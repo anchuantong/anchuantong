@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>无标题文档</title>
+<script src="$root/js/drag_tool.js"></script>
+<script src="$root/js/showWindow.js"></script>
+<script src="$root/js/dw/dreamweaver .js"></script>
+<link rel="stylesheet" type="text/css" href="$root/js/box_img/style.css" />
+</head>
+<script>
+var dw
+function addLoadEvent(func) {
+      var oldonload = window.onload;
+      if (typeof window.onload != 'function') {
+        window.onload = func;
+      } else {
+        window.onload = function() {
+          oldonload();
+          func();
+        }
+      }
+}
+function init(){
+  dw=new Dreamweaver("content",1024);
+  dw.showWindow.setPath("$root/js/box_img");
+ //document.documentElement.clientHeight
+}
+addLoadEvent(init)
+</script>
+<body>
+<div id="main1" style="float:left;border-right:1px solid #ccc;width:800px;" >
+<iframe width="100%" height="100%" id="content" name="content" frameborder="0"></iframe>
+</div>
+<div id="main2" style="float:left;width:220px;">
+<iframe width="100%" height="100%" id="desgin" name="desgin" src="$root/js/dw/desgin.html" frameborder="0"></iframe>
+</div>
+</body>
+
+</html>

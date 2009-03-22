@@ -34,6 +34,7 @@ public class IndexPage extends BaseController {
 
 	@RequestMapping("/index")
 	public String index() {
+		System.out.println("gggggggggggggg");
 		return "page/index";
 	}
 
