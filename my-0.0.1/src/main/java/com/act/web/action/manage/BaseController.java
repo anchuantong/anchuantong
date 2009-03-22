@@ -3,6 +3,8 @@ package com.act.web.action.manage;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,11 @@ public class BaseController {
 	@ModelAttribute("layout")
 	public String setLayout() {
 		return "layout/layout.vm";
+	}
+	
+	@ModelAttribute("root")
+	public String setRoot(HttpServletRequest request) {
+		return request.getContextPath();
 	}
 
 }

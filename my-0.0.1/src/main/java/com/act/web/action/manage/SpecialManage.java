@@ -29,7 +29,7 @@ import com.act.util.PageResult;
 /**
  * ×¨Ìâ¿ØÖÆ
  * 
- * @author anchuantong.tw
+ * @author anchuantong
  */
 @Controller
 @RequestMapping("/special/manage/*")
@@ -170,5 +170,14 @@ public class SpecialManage extends BaseController {
 			prev = 0;
 		}
 		return "redirect:showArticle?id=" + article.getId() + "&part=" + prev;
+	}
+	
+	
+	@RequestMapping
+	public String showPage(int specialId, @ModelAttribute("userSession") User user,ModelMap model){
+		Special special=specialBo.loadSpecial(specialId);
+		model.addAttribute("special", special);
+		
+		return "special/manage/edit_page";
 	}
 }

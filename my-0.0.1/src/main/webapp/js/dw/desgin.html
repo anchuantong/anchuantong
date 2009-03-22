@@ -16,24 +16,64 @@ ul.menu_t li{float:left;background:#e8e8e8;width:65px;height:24px;line-height:24
 #desgin{clear:both;width:198px;border:1px solid #ccc;margin-left:6px;margin-top:15px;}
 </style>
 <script>
+
+function getStyle(el,styleProp){
+	 if (window.getComputedStyle) var y = window.getComputedStyle(el,null).getPropertyValue(styleProp); //for firfox
+	 else if (el.currentStyle) var y = eval('el.currentStyle.' + styleProp);//for IE
+	 return y;
+}
+
+var styleConfig={
+		"width":{"before":"","after":"px"},
+		"height":{"before":"","after":"px"},
+		"background-image":{"before":"url('","after":"')","related":["fixed","repeat"]},
+		"background-color":{"before":"","after":""}
+		};
+alert(styleConfig['width'].after)
 function beginEdit(element){
+	alert(getStyle("element","background-color"))
 	document.getElementById("desgin").style.display="block";
 	document.getElementById("domId").value=element.id;
-	alert(element.id)
+	var styleVal=element.getAttribute("style");
+	if(styleVal==undefined){
+         return;
+	}
+	var arr=styleVal.split(";");
+	alert(arr[0])
+	
 }
 
  function addDom(domName){
-     var element=parent.dw.create(domName,"");
+     var element=parent.dw.create(domName);
      element.innerHTML="一个"+domName+"节点";
      element.onclick=function(){
     	 beginEdit(this);
      }
      parent.dw.append(element);
+    // parent.dw.openUpdate(element);
 	 return false;
  } 
 
  function updateStyle(){
-
+	 var fields=document.desgin_form;
+	 var styleVal="";
+	 var key,value;
+     for(var i=0;i<fields.length;i++){
+          if(fields[i].name.substring(0,6)=="style_"&&fields[i].value.length>0){
+        	  key=fields[i].name.substring(6)
+        	  styleVal+=key+":";
+        	  if(styleConfig[key].before!=undefined){
+        		  styleVal+=styleConfig[key].before;
+        	  }
+        	  styleVal+=fields[i].value;
+        	  if(styleConfig[key].after!=undefined){
+        		  styleVal+=styleConfig[key].after;
+        	  }
+        	  styleVal+=";";
+          }
+     }
+     var element=parent.dw.iframeDoc.getElementById(fields.domId.value);
+     element.setAttribute("style",styleVal);
  }
 </script>
 </head>
@@ -58,11 +98,12 @@ function beginEdit(element){
 <div id="desgin" style="display:none;">
 <form name="desgin_form" id="desgin_form">
       <input type="hidden" name="domId" id="domId" value="" />
-      <span>宽度:<input type="hidden" name="width" id="width" value="" />px</span>
-      <span>高度:<input type="hidden" name="height" id="height" value="" />px</span>
+      <span>宽度:<input type="text" name="style_width" id="style_width" value="" />px</span>
+      <span>高度:<input type="text" name="style_height" id="style_height" value="" />px</span>
+      <span>背景色:<input type="text" name="style_background-color" id="style_background-color" value="" /></span>
+      <span>背景图:<input type="text" name="style_background-image" id="style_background-image" value="" /></span>
       <input type="button" value="修改" onclick="updateStyle()"/>
 </form>      
 </div>
-
 </body>
 </html>
