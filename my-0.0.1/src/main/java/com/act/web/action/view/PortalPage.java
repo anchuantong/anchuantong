@@ -33,6 +33,9 @@ public class PortalPage extends BaseController {
 	
         
 	protected CategoryBo categoryBo;
+	
+	private String master;
+	
 	@Autowired
 	public void setUserBo(UserBo userBo) {
 		this.userBo = userBo;
@@ -48,10 +51,9 @@ public class PortalPage extends BaseController {
 	@ModelAttribute("configs")
 	public Map<String, Object> setConfigs(HttpServletRequest request, ModelMap model) {
 		String ids[] = StringUtil.parse(request.getRequestURI(), 2);
-		System.out.println("ggggg:"+ids[0]);
 		UserConfig config = userBo.findUserConfig(ids[0]);
+		master=ids[0];
 		if (config != null) {
-			System.out.println(config.getContent());
 			return StringUtil.str2hash(config.getContent());
 		}
 		return null;
@@ -62,7 +64,7 @@ public class PortalPage extends BaseController {
 		return "page/index";
 	}
 
-	@RequestMapping("/article/index/*")
+	@RequestMapping("/*/article/index/*")
 	public String articleIndex(HttpServletRequest request,ModelMap model) {
 		String ids[] = StringUtil.parse(request.getRequestURI(), 1);
 		int pge = 1;
@@ -89,7 +91,7 @@ public class PortalPage extends BaseController {
 	}
 
 	
-        @RequestMapping("/article/detail/*")
+        @RequestMapping("/*/article/detail/*")
 	public String articleDetail(HttpServletRequest request,ModelMap model) {
 		String ids[] = StringUtil.parse(request.getRequestURI(), 1);
 		int part = 0;
