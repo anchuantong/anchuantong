@@ -1,42 +1,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
-<link rel="stylesheet" type="text/css" href="$root/css/01/style.css" />
-<script src="$imgs/js/jquery.js"></script>
-<title>业务模式</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+#foreach($n in $!js_head)
+	<script src="$n"></script>
+#end	
+#set($body_style="")
+#if($util.isNotEmpty("$!configs.bg_image"))
+	#set($body_style="background-image:url($root/$!configs.bg_image);")
+#end
+#if($util.isNotEmpty("$!configs.bg_atta"))
+	#set($body_style="${body_style}background-attachment: $!configs.bg_atta;")
+#end
+#if($util.isNotEmpty("$!configs.main_color"))
+	#set($main_color="$!configs.main_color")
+#else
+	#set($main_color="#FFFFFF")
+#end
+<style>
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,label,textarea,p,blockquote,th,td{margin:0;padding:0;}
+fieldset,img{border:0;}
+ol,ul {list-style:none;}
+.hackbox {border-top:1px solid transparent !important;margin-top:-1px !important;border-top:0px;margin-top:0px;clear:both;visibility:hidden;}
+body{font-size:13px;font-family:'宋体';text-align:left;line-height:180%;}
+a{text-decoration:underline;}
+a:link,a:active,a:visited{text-decoration:none;}
+a:hover{text-decoration:underline;}
+#main{width:802px;height:100%;margin:0 auto;text-align:left;}
+#topbar{width:780px;height:30px;line-height:30px;background:#FFF;-moz-border-radius: 10px;-webkit-border-radius: 11px;text-align:right;padding-right:20px;margin:10px 0;}
+#titlebar{margin:10px 0;width:780px;height:30px;line-height:30px;background:#FFF;-moz-border-radius: 10px;-webkit-border-radius: 11px;padding-left:20px;}
+#bannerbar{margin:10px 0;}
+#content{width:800px;background:#FFF;-moz-border-radius: 10px;-webkit-border-radius: 11px;}
+#leftbar{float:left;width:600px;-moz-border-radius-topleft: 10px;-webkit-border-radius-topleft: 11px;-moz-border-radius-bottomleft: 10px;-webkit-border-radius-bottomleft: 11px;}
+#leftbar ul{margin:10px;height:auto;}
+#rightbar{float:right;width:200px;height:auto;-moz-border-radius-topright: 10px;-webkit-border-radius-topright: 11px;-moz-border-radius-bottomright: 10px;-webkit-border-radius-bottomright: 11px;}
+
+.editTable{text-align:left;border:1px solid #c0c0c0;margin:3px 0 10px 5px;BORDER-COLLAPSE: collapse;width:98%;cellPadding:1px;background:#FFFFFF;}
+.editTable td{padding-left:5px;}
+.editTable .label{background:#fff;text-align:right;padding-right:10px;}
+.editTable .field{background:#fff;text-align:left;padding-left:10px;}
+.editTable .field input{margin:3px 0;}
+.editTable textarea{margin:6px 0;width:90%;height:150px;font-size:14px;}
+.editTable .status{background:#fff;text-align:left;}
+#leftbar{background:$main_color}
+</style>
+<title>$</title>
 </head>
-<body>
-  <div id="main">
-      <div id="menubar">
-          <ul>
-             <li><a href="#">首页</a></li>
-			 #foreach($n in $categories)	
-				<li><a href="$root/portal/article/index/$n.Id" #if($category.getRoot().Id==$n.Id)  class="on"#end>$n.Name</a></li>
-			 #end	
-          </ul>
-          <div id="searchbar">
-            <form name="search_form">
-             <p><input type="text" name="keyword" class="skd"/></p>
-             <p><input type="image" src="$root/css/01/images/sbtn.gif" class="sbtn" width="49" height="23"></p>
-            </form>
-          </div>
-      </div>
-	 $screen_content
-  </div>
-  			
-	
-			<div id="footer">
-				<a href="/">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-					<a href="creative.php">Creative</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-					<a href="web_design.php">Web Design</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-					<a href="e-business.php">E-business</a>
-					<br/>
-				&copy; 2008-2011 an chuantong
-			</div>
+<body #if($util.isNotEmpty("$!body_style"))style="$body_style"#end>
+   <div id="main">
+         <div id="topbar" style="background:$main_color">
+              <a href="">登录</a>
+              <a href="">注册</a>
+		 </div>
+		 <div id="titlebar" style="background:$main_color">
+             哈哈哈哈哈哈哈哈哈哈哈哈
+		 </div>
+		 <div id="bannerbar">
+              <img src="banner.jpg" width="800"/>
+		 </div>
+		 <div id="content" style="background:$menu_color">
+         $screen_content
+		    <div class="hackbox"></div>
+		 </div>
+   </div>	
 
 </body>
-
-<script>
-    jQuery()
-</script>
+</html>

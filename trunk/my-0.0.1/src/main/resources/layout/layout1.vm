@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<link rel="stylesheet" type="text/css" href="$root/css/01/style.css" />
+<script src="$imgs/js/jquery.js"></script>
+<title>业务模式</title>
+</head>
+<body>
+  <div id="main">
+      <div id="menubar">
+          <ul>
+             <li><a href="#">首页</a></li>
+			 #foreach($n in $categories)	
+				<li><a href="$root/portal/article/index/$n.Id" #if($category.getRoot().Id==$n.Id)  class="on"#end>$n.Name</a></li>
+			 #end	
+          </ul>
+          <div id="searchbar">
+            <form name="search_form">
+             <p><input type="text" name="keyword" class="skd"/></p>
+             <p><input type="image" src="$root/css/01/images/sbtn.gif" class="sbtn" width="49" height="23"></p>
+            </form>
+          </div>
+      </div>
+	 $screen_content
+  </div>
+  			
+	
+			<div id="footer">
+				<a href="/">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="creative.php">Creative</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="web_design.php">Web Design</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="e-business.php">E-business</a>
+					<br/>
+				&copy; 2008-2011 an chuantong
+			</div>
+
+</body>
+
+<script>
+    jQuery()
+</script>

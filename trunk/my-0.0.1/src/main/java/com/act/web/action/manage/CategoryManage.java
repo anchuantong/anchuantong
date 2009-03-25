@@ -19,7 +19,7 @@ import com.act.db.model.User;
 @Controller
 @RequestMapping("/user/category/*")
 @SessionAttributes("userSession")
-public class CategoryManage extends BaseController {
+public class CategoryManage extends UserController {
 
 	
 	public List<Category> setCategories(){

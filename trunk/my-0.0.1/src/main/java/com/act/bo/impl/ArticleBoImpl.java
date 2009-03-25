@@ -5,6 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.suigeneris.jrcs.diff.DiffException;
+import org.suigeneris.jrcs.rcs.Archive;
+import org.suigeneris.jrcs.rcs.InvalidFileFormatException;
+import org.suigeneris.jrcs.rcs.InvalidVersionNumberException;
+import org.suigeneris.jrcs.rcs.impl.NodeNotFoundException;
+import org.suigeneris.jrcs.util.ToString;
+
+import com.act.bean.ArchiveBean;
 import com.act.bo.ArticleBo;
 import com.act.db.model.Article;
 import com.act.db.model.ArticlePart;
@@ -45,7 +53,21 @@ public class ArticleBoImpl extends BaseBoImpl implements ArticleBo {
 			articlePart.setArticle(article);
 			article.getParts().add(articlePart);
 		}
-		articlePart.setBody(body);
+		Archive archive=null;
+		if(StringUtil.isEmpty(articlePart.getBody())){
+			 archive= new Archive(ToString.stringToArray(body), "");
+		}else{
+			archive=ArchiveBean.setArchive(articlePart.getBody());
+			try {
+	                        archive.addRevision(ToString.stringToArray(body), "");
+                        } catch (InvalidVersionNumberException e) {
+                        } catch (NodeNotFoundException e) {
+                        } catch (InvalidFileFormatException e) {
+                        } catch (DiffException e) {
+                        }
+		}
+		
+		articlePart.setBody(archive.toString());
 		articlePart.setTitle(partTitle);
 		getDao().save(articlePart);
 		getDao().update(article);
