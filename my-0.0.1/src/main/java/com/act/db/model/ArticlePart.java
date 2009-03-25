@@ -1,5 +1,6 @@
 package com.act.db.model;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.suigeneris.jrcs.rcs.Archive;
 
 /**
  * @author  an_chuantong
@@ -34,6 +37,8 @@ public class ArticlePart  implements Serializable {
         private String body;
 
         private String title;
+        
+        
         
         public Integer getId() {
         	return id;

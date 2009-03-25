@@ -22,7 +22,7 @@ import com.act.db.model.User;
 @Controller
 @RequestMapping("/user/album/*")
 @SessionAttributes("userSession")
-public class AlbumManage extends BaseController {
+public class AlbumManage extends UserController {
 
 
 	private PictureBo pictureBo;

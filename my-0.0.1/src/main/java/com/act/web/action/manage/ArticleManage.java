@@ -1,7 +1,9 @@
 
 package com.act.web.action.manage;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.act.bo.ArticleBo;
 import com.act.bo.UserBo;
 import com.act.db.model.Article;
+import com.act.db.model.ArticlePart;
 import com.act.db.model.Category;
 import com.act.db.model.User;
 import com.act.form.ArticleForm;
@@ -28,20 +31,13 @@ import com.act.util.PageResult;
 @Controller
 @RequestMapping("/user/article/*")
 @SessionAttributes("userSession")
-public class ArticleManage extends BaseController {
-
-	private UserBo userBo;
+public class ArticleManage extends UserController {
 
 	private ArticleBo articleBo;
 
 	@Autowired
 	public void setArticleBo(ArticleBo articleBo) {
 		this.articleBo = articleBo;
-	}
-
-	@Autowired
-	public void setUserBo(UserBo userBo) {
-		this.userBo = userBo;
 	}
 
 	@RequestMapping
@@ -67,15 +63,29 @@ public class ArticleManage extends BaseController {
 	@RequestMapping
 	public String showEdit(ArticleForm form, ModelMap model, @ModelAttribute("userSession") User user) {
 		model.addAttribute("categories", categoryBo.loadRootCategories(user.getUsername()));
+		int part = form.getPart();
 		if (form != null && form.getId() != null && form.getId() > 0) {
-			model.addAttribute("article", articleBo.loadArticle(form.getId()));
+			Article article = articleBo.loadArticle(form.getId());
+			if (article != null) {
+				model.addAttribute("article", article);
+				List<ArticlePart> parts = new ArrayList<ArticlePart>();
+				if (parts != null) {
+					if (parts.size() > part) {
+						ArticlePart articlePart = parts.get(part);
+						model.addAttribute("body", articlePart.getBody());
+						model.addAttribute("articlePart", articlePart);
+					}
+					model.addAttribute("partSize", parts.size() );
+				}
+			}
 		}
-		model.addAttribute("part", form.getPart());
+		model.addAttribute("part", part);
+
 		return "user/article/edit";
 	}
 
 	@RequestMapping
-	public String edit(Article article,ArticleForm form , ModelMap model, @ModelAttribute("userSession") User user) {
+	public String edit(Article article, ArticleForm form, ModelMap model, @ModelAttribute("userSession") User user) {
 		Article articlePo = null;
 		if (article != null && article.getId() != null && article.getId() > 0) {
 			articlePo = articleBo.loadArticle(article.getId());
@@ -88,7 +98,7 @@ public class ArticleManage extends BaseController {
 		} else {
 			articlePo.setTitle(article.getTitle());
 		}
-		Integer catId=form.getCatId();
+		Integer catId = form.getCatId();
 		if (catId != null && catId > 0) {
 			Category category = categoryBo.loadCategory(catId);
 			if (category != null) {
@@ -98,17 +108,17 @@ public class ArticleManage extends BaseController {
 		user = userBo.findUser(user.getUsername());
 		articlePo.setModifed(new Date());
 		articlePo.setModifer(user.getUsername());
-		boolean succ = articleBo.saveArticle(articlePo, form.getBody(), form.getPartTitle(),form.getPart());
-		
+		boolean succ = articleBo.saveArticle(articlePo, form.getBody(), form.getPartTitle(), form.getPart());
+
 		if (succ) {
 			return "success";
 		}
-		
+
 		return "user/article/edit";
 	}
-	
+
 	@RequestMapping
-	public String addSmall(Article article,ArticleForm form , ModelMap model, @ModelAttribute("userSession") User user) {
+	public String addSmall(Article article, ArticleForm form, ModelMap model, @ModelAttribute("userSession") User user) {
 		Article articlePo = null;
 		if (article != null && article.getId() != null && article.getId() > 0) {
 			articlePo = articleBo.loadArticle(article.getId());
@@ -121,7 +131,7 @@ public class ArticleManage extends BaseController {
 		} else {
 			articlePo.setTitle(article.getTitle());
 		}
-		Integer catId=form.getCatId();
+		Integer catId = form.getCatId();
 		if (catId != null && catId > 0) {
 			Category category = categoryBo.loadCategory(catId);
 			if (category != null) {
@@ -135,7 +145,7 @@ public class ArticleManage extends BaseController {
 		if (succ) {
 			return "success";
 		}
-		
+
 		return "user/article/add_small";
 	}
 
@@ -148,34 +158,33 @@ public class ArticleManage extends BaseController {
 		}
 		return "redirect:index";
 	}
-	
-	
+
 	@RequestMapping
 	public String addPart(@RequestParam("id") Integer id, @ModelAttribute("userSession") User user) {
 		Article article = articleBo.loadArticle(id);
 		if (article != null && article.getCreator().equals(user.getUsername())) {
 			articleBo.addPart(article);
-			
+
 		}
 		int next = article.getParts().size() - 1;
 		if (next < 0) {
 			next = 0;
 		}
-		return "redirect:showEdit?id="+article.getId()+"&part="+next;
+		return "redirect:showEdit?id=" + article.getId() + "&part=" + next;
 	}
-	
+
 	@RequestMapping
-	public String deletePart(@RequestParam("id") Integer id,@RequestParam("part") Integer part, @ModelAttribute("userSession") User user) {
+	public String deletePart(@RequestParam("id") Integer id, @RequestParam("part") Integer part, @ModelAttribute("userSession") User user) {
 		Article article = articleBo.loadArticle(id);
-		
+
 		if (article != null && article.getCreator().equals(user.getUsername())) {
-			articleBo.deletePart(article,part);
+			articleBo.deletePart(article, part);
 		}
 		int prev = article.getParts().size() - 1;
 		if (prev < 0) {
 			prev = 0;
 		}
-		return "redirect:showEdit?id="+article.getId()+"&part="+prev;
+		return "redirect:showEdit?id=" + article.getId() + "&part=" + prev;
 	}
 
 }

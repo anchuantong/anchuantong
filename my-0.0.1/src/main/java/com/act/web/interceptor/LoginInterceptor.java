@@ -24,32 +24,30 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	private UserBo userBo;
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		if (request.getRequestURI().indexOf("/user/") > -1 || request.getRequestURI().indexOf("/special/") > -1) {
-			UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, Config.SESSION_NAME);
-			if (userSession == null) {
-				Cookie cookie = WebUtils.getCookie(request, "AN_CLIENT_DATA");
-				if (cookie != null) {
-					String username = cookie.getValue();
-					if (!StringUtil.isEmpty(username)) {
-						username = StringUtil.cipher.decryptString(username);
-						User user = userBo.findUser(username);
-						if (user != null) {
-							userSession = user;
-							WebUtils.setSessionAttribute(request, Config.SESSION_NAME, userSession);
-						}
+		UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, Config.SESSION_NAME);
+		if (userSession == null) {
+			Cookie cookie = WebUtils.getCookie(request, "AN_CLIENT_DATA");
+			if (cookie != null) {
+				String username = cookie.getValue();
+				if (!StringUtil.isEmpty(username)) {
+					username = StringUtil.cipher.decryptString(username);
+					User user = userBo.findUser(username);
+					if (user != null) {
+						userSession = user;
+						WebUtils.setSessionAttribute(request, Config.SESSION_NAME, userSession);
 					}
-
 				}
-				if (userSession == null) {
-					if (request.getRequestURI().indexOf("/special/") > -1) {
-                                               User user=new User();
-                                               user.setUsername("anonymous");
-                                               userSession = user;
-                                               WebUtils.setSessionAttribute(request, Config.SESSION_NAME, userSession);
-					} else {
-						response.sendRedirect(request.getContextPath() + "/portal/login");
-						return false;
-					}
+
+			}
+			if (userSession == null) {
+				if (request.getRequestURI().indexOf("/special/") > -1) {
+					User user = new User();
+					user.setUsername("anonymous");
+					userSession = user;
+					WebUtils.setSessionAttribute(request, Config.SESSION_NAME, userSession);
+				} else {
+					response.sendRedirect(request.getContextPath() + "/portal/login");
+					return false;
 				}
 			}
 		}

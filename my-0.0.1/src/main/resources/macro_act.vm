@@ -36,13 +36,13 @@
 		    var uploadImg=true;
 	</script>
 		
-	<script type="text/javascript" src="$imgs/js/FCKeditor/fckeditor.js"></script>
+	<script type="text/javascript" src="$root/js/FCKeditor/fckeditor.js"></script>
 	<script type="text/javascript">
 		#set($i=1)
 		
 		#foreach($n in $arr)
 			var oFCKeditor$i;
-			var sBasePath = "$imgs/js/FCKeditor/";
+			var sBasePath = "$root/js/FCKeditor/";
 			oFCKeditor${i} = new FCKeditor( "$n") ;
 			oFCKeditor${i}.BasePath	= sBasePath ;
 			oFCKeditor${i}.ToolbarSet = "$basePath";
