@@ -1,10 +1,4 @@
 #set($root=$request.getContextPath())
-#if($article&&$article.Parts)
-  #set($partSize=$article.Parts.size())
-  #set($articlePart=$!article.Parts.get($!part))
-#else
-	 #set($partSize=0)
-#end	
 
 <div id="content">
 	<form name="form1" id="form1" method="POST" action="edit">
@@ -35,7 +29,7 @@
 		#end
 		<p>
 			<label>ÄÚÈÝ£º</label><br/>
-			<textarea type="text" name="body" >$!articlePart.Body</textarea>
+			<textarea type="text" name="body" >$!body</textarea>
 		</p>	
 		
 		<p>

@@ -1,0 +1,71 @@
+#set($js_head=["$root/js/jquery.js"])
+<style>
+	.bgs{float:left;text-align:center;width:150px;margin:10px 0;}
+	.bgs p{width:150px;height:110px;overflow:hidden;}
+</style>
+<form name="user" id="user" method="post" action="style" enctype="multipart/form-data">
+	#inputHidden(["back_url","style"])
+<table class="editTable" border="1">
+	<tr>
+		<td class="label" width="120">背景图</td>
+		<td class="field">
+			<div class="bgs">
+					<p>
+						无
+					</p>
+					<input type="radio" value="" name="bg_image" #if("$configs.bg_image"=="$n.Name") checked="checked"#end onclick="updateBgImg(this.value)"/>
+				  </div>
+			#foreach($n in $bgs)
+				 <div class="bgs">
+					<p>
+						<img src="$root/css/theme/bg/$n.Name" width="110"/>
+					</p>
+					<input type="radio" value="css/theme/bg/$n.Name" name="bg_image" #if("$configs.bg_image"=="css/theme/bg/$n.Name") checked="checked"#end onclick="updateBgImg(this.value)"/>
+				  </div>
+			#end	
+         </td>
+	</tr>
+	<tr>
+		<td class="label" width="120">背景图布置方式：</td>
+		<td class="field">
+			<select name="bg_atta" onchange="updateAtta(this.value)">
+				<option value="fixed"#if("$configs.bg_atta"=="fixed") selected="selected"#end>固定</option>
+				<option value="scroll"#if("$configs.bg_atta"=="scroll") selected="selected"#end>滚动</option>
+			</select>	
+        </td>
+	</tr>
+	<tr>
+		<td class="label" width="120">首页横幅图片：</td>
+		<td class="field">
+			<input type="file" name="banner" size="25" />
+			#if($configs.banner)
+				<br/>
+				<img src="$root/upload/$configs.banner" width="800"/>
+			#end	
+        </td>
+	</tr>
+	<tr>
+		<td class="label" width="120">主颜色：</td>
+		<td class="field">
+			<input type="text"  name="main_color" value="$!configs.main_color" size="10" onclick="onSelectColor(this)"/>
+        </td>
+	</tr>
+	<tr>
+		<td class="label" width="120">菜单颜色：</td>
+		<td class="field">
+			<input type="text"  name="menu_color" value="$!configs.menu_color" size="10" onclick="onSelectColor(this)"/>
+        </td>
+	</tr>
+</table>
+	<input type="submit" name="sbt"  class="btnStyle"  value="修改"/>
+</form>
+<script>
+var select_color_html="$root/js/select_color.html"
+  function updateBgImg(src){
+     $("body").css("background-image","url($root/"+src+")");
+  }
+  function updateAtta(val){
+      $("body").css("background-attachment",val);
+  }
+</script>	
+<script src="$root/js/color_select.js"></script>
