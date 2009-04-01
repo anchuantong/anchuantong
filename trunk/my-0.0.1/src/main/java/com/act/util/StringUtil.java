@@ -16,7 +16,7 @@ import com.act.util.security.Blowfish;
 import com.act.web.util.Config;
 
 public class StringUtil {
-	public static Blowfish cipher = new Blowfish("li,an,ch");
+	public static Blowfish cipher = new Blowfish("yangyang");
 	private static String[] FALSE_STRINGS = { "false", "null", "nul", "off", "no", "n" };
 
 	/**
