@@ -59,6 +59,11 @@ public class PortalPage extends BaseController {
 		return null;
 	}
 
+	@ModelAttribute("master")
+	public String setMaster( ModelMap model) {
+		return master;
+	}
+	
 	@RequestMapping("/*/index")
 	public String index() {
 		return "page/index";

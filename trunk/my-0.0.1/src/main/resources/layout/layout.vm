@@ -17,6 +17,11 @@
 #else
 	#set($main_color="#FFFFFF")
 #end
+#if($util.isNotEmpty("$!configs.menu_color"))
+	#set($menu_color="$!configs.menu_color")
+#else
+	#set($menu_color="#FFFFFF")
+#end
 <style>
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,label,textarea,p,blockquote,th,td{margin:0;padding:0;}
 fieldset,img{border:0;}
@@ -42,9 +47,9 @@ a:hover{text-decoration:underline;}
 .editTable .field input{margin:3px 0;}
 .editTable textarea{margin:6px 0;width:90%;height:150px;font-size:14px;}
 .editTable .status{background:#fff;text-align:left;}
-#leftbar{background:$main_color}
+#rightbar{background:$menu_color;}
 </style>
-<title>$</title>
+<title>$master</title>
 </head>
 <body #if($util.isNotEmpty("$!body_style"))style="$body_style"#end>
    <div id="main">
@@ -55,10 +60,12 @@ a:hover{text-decoration:underline;}
 		 <div id="titlebar" style="background:$main_color">
              込込込込込込込込込込込込
 		 </div>
+		#if($util.isNotEmpty("$!configs.banner"))
 		 <div id="bannerbar">
-              <img src="banner.jpg" width="800"/>
+              <img src="$root/$!configs.banner" width="800"/>
 		 </div>
-		 <div id="content" style="background:$menu_color">
+		 #end
+		 <div id="content" style="background:$main_color">
          $screen_content
 		    <div class="hackbox"></div>
 		 </div>
