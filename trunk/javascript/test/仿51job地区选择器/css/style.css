@@ -1,0 +1,119 @@
+#select_cat_blank{
+   position: absolute;
+   left:0;
+   top:0;
+   margin:0; 
+   filter:alpha(opacity=50,Style=0);/** ie下的透明度*/
+   -moz-opacity:0.5;
+   background:#000;
+   display:none;
+}
+
+#select_cat_blank iframe{
+   filter:alpha(opacity=50,Style=0);/** ie下的透明度*/
+   -moz-opacity:0.5;
+   background:#000;
+}
+#select_cat_box{
+   position: absolute;
+   z-index: 10;
+   margin:0; 
+   width:540px;
+   -moz-border-radius: 10px; /** firefox 实现圆角*/
+   -webkit-border-radius: 11px;/** firefox 实现圆角*/
+   border: 1px solid #000;
+   background:#FF7400;
+   display:none;
+   font-size:12px;
+}
+
+#select_cat_box #select_cat_title{
+   margin:0;
+   padding:0;
+   width:540px;
+   height:24px;
+   line-height:24px;
+   -moz-border-radius-topleft: 10px; /** firefox 实现左边头部圆角*/
+   -webkit-border-radius-topleft: 11px;
+   -moz-border-radius-topright: 10px; /** firefox 实现右边头部圆角*/
+   -webkit-border-radius-topright: 11px;
+}
+#select_cat_box #select_cat_title p{
+   margin:0 0 0 10px;
+   padding:0;
+   height:24px;
+   line-height:24px;
+   float:left;
+}
+#select_cat_box #select_cat_title a{
+   margin:0 10px 0 0;
+   padding:0;
+   float:right;
+   display:block;
+   font-size:12px;  
+   color:#000; 
+   text-decoration:none;
+}
+#select_cat_content{
+   padding:10px;
+   background:#FFF;
+   -moz-border-radius-bottomleft: 10px; /** firefox 实现左边底部圆角*/
+   -webkit-border-radius-bottomleft: 11px;
+   -moz-border-radius-bottomright: 10px; /** firefox 实现右边底部圆角*/
+   -webkit-border-radius-bottomright: 11px;
+}
+
+#select_cat_content p.t{
+   margin:5px 0;
+   padding-left:10px;
+   height:28px;
+   line-height:28px;
+   background:#e8e8e8;
+   clear:both;
+   -moz-border-radius: 5px; /** firefox 实现圆角*/
+   -webkit-border-radius: 6px;/** firefox 实现圆角*/
+}
+
+#select_cat_box .t_checked{
+   margin:5px 0;
+   padding-left:10px;
+   background:#FFF;
+   clear:both;
+   border:1px solid #CCC;
+   -moz-border-radius: 5px; /** firefox 实现圆角*/
+   -webkit-border-radius: 6px;/** firefox 实现圆角*/
+}
+
+#select_cat_box span{
+   width:70px;
+   display:block;
+   font-size:13px;
+   float:left;
+}
+#select_cat_box span a{
+   text-decoration:none;
+   font-size:12px;  
+   color:#000;
+}
+#select_cat_box span a:hover{
+   text-decoration:underline;
+}
+
+#select_cat_box  #box_returns{
+   margin-left:20px;
+   text-decoration:none;
+   font-size:12px;  
+   color:#000;
+} 
+
+#select_cat_box .tt{
+   font-weight:bold;
+   clear:both;
+   padding-left:10px;
+   width:90px; 
+   font-size:13px;
+   color:#000;
+   text-decoration:none;
+}
+
+#select_cat_box  .checks{margin-left:10px;}

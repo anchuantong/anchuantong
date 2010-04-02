@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>textarea妙用</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" /><meta http-equiv="Pragma" content="no-cache" />
+<style>
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,label,textarea,p,blockquote,th,td{margin:0;padding:0;}
+a{text-decoration:underline;}
+a:link,a:active,a:visited{color:#000;text-decoration:none;}
+a:hover{color:#000;text-decoration:none;}
+
+
+	#it_left_menu2{border:0px solid #afcbdf;width:600px;margin:0 0 0 0;padding:0 0 0 2px;text-align:left;}
+	
+	.hackbox {border-top:1px solid transparent !important;margin-top:-1px !important;border-top:0px;margin-top:0px;clear:both;visibility:hidden;}
+	
+	#top_it_menu {margin:12px 0 0 0;border-bottom:1px solid #afcbdf;height:21px;padding:0;list-style:none;}
+	#top_it_menu li{position:relative;top:1px;margin:0 10px;float:left;padding:0 2px;margin:0;background:#C3D9FF url(tb_unselected_bg.gif);text-align:center;height:21px;line-height:21px;border-left:1px solid #afcbdf;}
+	#top_it_menu .righton{background: url(tb_selected_child.gif)  no-repeat;width:9px;height:21px;border:0;margin-right:5px;margin-top:0  !important;margin-top:1px ;}
+	#top_it_menu li.right{background: url(tb_unselected.gif)  no-repeat;width:9px;height:21px;border:0;margin-right:5px;}
+	#top_it_menu .on{background:#F0F4FF;border-top:1px solid #afcbdf;height:20px;}
+	#top_it_menu p{float:left;border:0;margin-left:20px;background;#FFF;}
+	#top_it_menu a:link{text-decoration:none;color:#425b79;}
+	#top_it_menu a:active{text-decoration:none;color:#425b79;}
+	#top_it_menu a:visited{text-decoration:none;color:#425b79;}
+	
+	#content{border:1px solid #afcbdf;border-top:0;padding:5px 0;}
+
+/** 列表的表格样式*/
+table.listTable{margin:5px 0;width:100%;border:1px;border-collapse:collapse;border-right:1px solid #ccc;border-left:1px solid #ccc;border-top:1px solid #ccc;}
+table.listTable tr.beta{background: #cfcfcf;width:100%;height:28px;}
+table.listTable tr.beta p{margin:4px 0;font-size:15px;color:#000;font-weight:bold;height:18px;border-right:1px solid #898989;border-left:1px solid #FFF;line-height:18px;text-align:center;}
+table.listTable tr.beta p.first{border-left:0;}
+table.listTable tr.beta p.last{border-right:0;}
+table.listTable tr.even {height:28px;line-height:24px;background-color: #f1f1f1; color: #000000; }
+table.listTable tr.even td{border-bottom:1px solid #ccc;border-collapse:collapse;text-align:left;padding-left:15px;}
+table.listTable tr.odd {height:28px;line-height:24px;background-color: #FFF;}
+table.listTable tr.odd td{border-bottom:1px solid #ccc;border-collapse:collapse;text-align:left;padding-left:15px;}
+table.listTable td.tf{padding-left:0;font-size:14px;}
+table.listTable td.tf a{padding-left:0;font-size:14px;}
+table.listTable td img{float:left;margin:6px 3px 0 3px ;border:0}
+
+/** 国际足球新闻*/
+#box_left{float:left;width:180px;text-align:center;margin:0 10px 0 0}
+#box_right{float:left;}
+.tit_hot{font-family:黑体;font-size:18px;font-weight:100;margin:5px 0;}
+.dotLine {border-bottom:1px dashed #ccc;display:block;height:1px;overflow:hidden;margin:5px 0;}
+
+
+/** 引导用户导航*/
+.td1 {
+border:1px solid #BCBCBC;
+color:#888888;
+cursor:pointer;
+font-size:14px;
+height:30px;
+text-align:center;
+width:100px;
+}
+.td2 {
+background:url("http://www.hiyoyo.com/shopadmin/user_guide/images/arrow.gif") no-repeat scroll center center transparent;
+width:40px;
+}
+.td3 {
+border:2px solid #FF9900;
+color:#FF9900;
+cursor:pointer;
+font-size:14px;
+font-weight:bold;
+height:30px;
+text-align:center;
+width:100px;
+}
+.text1 {
+font-size:18px;
+font-weight:bold;
+}
+
+
+textarea{display:none;}
+</style>
+
+</head>
+<body>
+<p><h3>碰到这样情况：</h3><br/>
+后端模板拿到HTML代码后，前端需要做一定交互，对各个DIV做布局变动。<br/>
+后端由于某种原因不能准确的把变动好的代码输出到浏览器相应位置。
+<h3>优点</h3>
+1.可将各个DIV放在TEXTAREA中，减少AJAX交互带来的服务器连接数。<br/>
+2.textarea中DOM内容浏览器不会解析。因此对解析速度造成影响不大<br/>
+3.降低编写代码的负责度
+</p>
+<div id="it_left_menu2">
+	<ul id="top_it_menu">
+         <li  class="on" style="margin-left:8px;"><a href="#" title="查看列表" rel="list"><strong>&nbsp;列表&nbsp;</strong></a></li>
+         <li  class="righton"  ></li>
+         <li  ><a href="#" title="查看菜单二" rel="list"><strong>&nbsp;菜单二&nbsp;</strong></a></li>
+         <li  class="right" ></li>
+		 <li  ><a href="#" title="查看国际足球新闻" rel="box"><strong>&nbsp;国际足球新闻&nbsp;</strong></a></li>
+         <li  class="right" ></li>
+		 <li  ><a href="#" title="查看菜单四" rel="list"><strong>&nbsp;菜单四&nbsp;</strong></a></li>
+         <li  class="right" ></li>
+		 <li  ><a href="#" title="查看引导用户导航" rel="nav"><strong>&nbsp;引导用户导航&nbsp;</strong></a></li>
+         <li  class="right" ></li>
+    </ul>
+<div id="content">
+   
+
+
+
+</div>
+
+</div>
+<textarea id="list_area">
+ <table class="listTable">
+	<tr class="beta">
+		<td><p class="first">名称</p></td>
+		<td><p>国家</p></td><td><p>图标</p></td><td><p class="last">操作</p></td>	
+	</tr>
+
+	<tr class="even">
+		<td>英超</td>
+		<td>英格兰</td>
+		<td></td>
+		<td><a href="#" class="btn_small" title="编辑"><img src="edit.gif"/></a>
+		    <a href="#" class="btn_small" title="删除" onclick="return confirm('确认删除?')"><img src="delete.gif"/></a>
+		</td>	
+	</tr>	
+	<tr class="odd">		
+		<td>西甲</td>
+		<td>西班牙</td>
+		<td></td>
+		<td><a href="#" class="btn_small" title="编辑"><img src="edit.gif"/></a>
+		    <a href="#" class="btn_small" title="删除" onclick="return confirm('确认删除?')"><img src="delete.gif"/></a>
+		</td>	
+	</tr>
+	<tr class="odd">		
+		<td>西甲</td>
+		<td>西班牙</td>
+		<td></td>
+		<td><a href="#" class="btn_small" title="编辑"><img src="edit.gif"/></a>
+		    <a href="#" class="btn_small" title="删除" onclick="return confirm('确认删除?')"><img src="delete.gif"/></a>
+		</td>	
+	</tr>
+	<tr class="odd">		
+		<td>德甲</td>
+		<td>德国</td>
+		<td></td>
+		<td><a href="#" class="btn_small" title="编辑"><img src="edit.gif"/></a>
+		    <a href="#" class="btn_small" title="删除" onclick="return confirm('确认删除?')"><img src="delete.gif"/></a>
+		</td>	
+	</tr>
+	<tr class="odd">		
+		<td>意甲</td>
+		<td>意大利</td>
+		<td></td>
+		<td><a href="#" class="btn_small" title="编辑"><img src="edit.gif"/></a>
+		    <a href="#" class="btn_small" title="删除" onclick="return confirm('确认删除?')"><img src="delete.gif"/></a>
+		</td>	
+	</tr>	
+
+   </table>
+</textarea>
+<textarea id="box_area">
+   <div id="box_goal">
+		<div id="box_left">
+			<p><img src="http://img4.cache.netease.com/sports/2010/3/22/20100322055702f7746.jpg"></p>
+			<p><a href="http://goal.sports.163.com/stats/zhanbao/295021.html">梅西连场戴帽巴萨4-2</a></p>
+		</div>
+		<div id="box_right">
+			<h3 class="tit_hot"><a href="http://goal.sports.163.com/stats/zhanbao/284305.html">朴智星绝杀 曼联2-1利物浦登顶</a></h3>
+             	    <ul>
+                   	  <li><a href="http://goal.sports.163.com/stats/zhanbao/302136.html">小罗助攻因扎吉破门 米兰1-1无缘榜首仍落后1分</a></li>
+                   	  <li><a href="http://goal.sports.163.com/stats/zhanbao/302139.html">卡萨诺35米吊射戏斑马门神 尤文0-1桑普跌至第6</a></li>
+
+                   	  <li><a href="http://goal.sports.163.com/stats/zhanbao/284302.html">德罗巴破门迪乌夫扳平 切尔西客场1-1布莱克本</a></li>
+                   	  <li><a href="http://sports.163.com/10/0321/19/62ARDK4H00051CCL.html">切尔西王牌婚变美妻变艳星 衣着大胆近裸体(图)</a></li>
+                   	  <li><a href="http://sports.163.com/10/0322/00/62BCSFL100051CCL.html">曼联亚洲球王灭尽3大豪门 利物浦成最新牺牲者</a></li>
+                    </ul>
+                    <span class="dotLine"></span>
+             	    <ul>
+                   	  <li><a href="http://sports.163.com/10/0322/10/62CFKS2N00051CD5.html">皮队3项最佳反衬斑马窘境 36岁王子扛尤文大旗</a></li>
+
+                   	  <li><a href="http://sports.163.com/10/0322/08/62C9DFHP00051CD5.html">州联赛：阿德梅开二度 弗拉门戈2-2平(视频)</a></li>
+                   	  <li><a href="http://sports.163.com/10/0322/07/62C71M4C00051C8V.html">足坛进入3人转时代 C罗掉队已落后梅西一大步</a></li>
+                   	  <li><a href="http://sports.163.com/10/0322/07/62C6GI1900051C8V.html">伊布被拯救需谢1人 有他在瑞典人本该帽子戏法</a></li>
+                   	  <li><a href="http://sports.163.com/10/0322/07/62C5KL8V00051C8V.html">梅西连过4人演老马传奇 谁说没双核跳蚤是废物</a></li>
+                    </ul>
+        </div>
+		<div class="hackbox"></div>
+   </div>
+</textarea>
+
+<textarea id="nav_area">
+<table cellspacing="0" cellpadding="0" border="0" align="center">
+      <tbody><tr>
+        <td onclick="location.href='step2.html'" class="td3"><!--<span class="text1">1</span> -->基本信息设置</td>
+        <td class="td2">&nbsp;</td>
+        <td onclick="location.href='step3.html'" class="td1"><!--<span class="text1">2</span> -->添加商品数据</td>
+        <td class="td2">&nbsp;</td>
+        <td onclick="location.href='step4.html'" style="width: 140px;" class="td1"><!--<span class="text1">3</span> -->设置配送&amp;支付方式</td>
+
+        <td class="td2">&nbsp;</td>
+        <td onclick="location.href='step5.html'" class="td1"><!--<span class="text1">5</span> -->设置完成</td>
+        </tr>
+    </tbody>
+</table>
+</textarea>
+<script src="http://anchuantong.appspot.com//static/js/jquery-1.2.6.min.js"></script>
+<script>
+(function(){
+	var menuParent
+    function init(){
+			menuParent=document.getElementById("top_it_menu");
+			if(menuParent==undefined){
+				return;
+			}
+			var aObjs=menuParent.getElementsByTagName("a");
+			for(var i=0;i<aObjs.length;i++){
+				aObjs[i].onmouseover=function(){
+					overEvent(this);
+				}
+
+			}
+
+	}
+
+	function overEvent(obj){
+		var liObjs=menuParent.getElementsByTagName("li");
+		for(var i=0;i<liObjs.length;i++){
+			var className=liObjs[i].className;
+            if(className==undefined||className==null||className.length==0){
+				className="";
+			}
+			if(className.indexOf("on")>-1){
+				className=className.substring(0,className.indexOf("on"))
+			}
+			liObjs[i].className=className;
+		}
+		obj.parentNode.className="on";
+		for(var i=0;i<liObjs.length;i++){
+			var className=liObjs[i].className;
+			if(className=="on"){
+				liObjs[i+1].className="righton";
+			}
+		}
+		var rel=obj.getAttribute("rel");
+		var out=document.getElementById(rel+"_area").value;
+		document.getElementById("content").innerHTML=out;
+		
+	}
+
+	window.onload=function(){
+		
+		init();
+		var aObjs=menuParent.getElementsByTagName("a");
+		overEvent(aObjs[0]);
+	}
+})()   
+</script>
+</body>
+</html>
+
+
