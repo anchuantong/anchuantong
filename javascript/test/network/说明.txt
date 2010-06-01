@@ -1,0 +1,28 @@
+1.jquery.js
+  基础框架
+
+2.CanvasUtil.js
+  对html canvas提供画图公共方法
+
+3.network.top.js
+  画图方法
+
+4.data.js
+  拓扑图配置数据
+  变量描述：
+   switchs：交换机列表
+   trafficDevices：端口之间流向关系以及当前流量大小
+			trafficDevices属性说明
+				from：流出端口所在设备
+				to:流入端口所在设备
+     				bps:流量大小
+				formPort：流出端口ID,可为空
+				toPort:流入端口ID,可为空
+				flagId:可为空
+                
+   sites：站点列表
+  
+
+switch和site之间的关系，
+现在是通过分析字符串，如HZCM2_CSW_C7609_1.taobao.com，他包含CM2，那他应该花在CM2机房内
+  

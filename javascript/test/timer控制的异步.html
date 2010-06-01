@@ -1,0 +1,30 @@
+<html>
+<body>
+<div id="test">
+</div>
+<script>
+var timer={};
+timer.test1={};
+timer.test1.index=1;
+function appae(test){
+		var obj=timer[test+""];
+		var p=document.createElement("p");
+		p.innerHTML=obj.index+test;
+		document.getElementById("test").appendChild(p)
+		obj.index=obj.index+1;
+		if(obj.index>50){
+			clearInterval(obj.timer)
+		}
+};
+timer.test1.timer=setInterval(function(){
+		appae("test1");
+}, 50);
+timer.test2={};
+timer.test2.index=1;
+timer.test2.timer=setInterval(function(){
+		appae("test2");
+}, 50);
+</script>
+
+</body>
+</html>

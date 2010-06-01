@@ -1,0 +1,10 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,label,textarea,blockquote,th,td,input{margin:0;padding:0;font-size:13px;font-family:'ËÎÌו';color:#58666f;}
+fieldset,img{border:0;vertical-align:middle}
+ol,ul,li {list-style:none;}
+p{margin:0;padding:0;}
+body{font-size:12px;font-family:'ËÎÌו';line-height:180%;text-align:left;background:#b4b4b4;}
+a:link,a:active,a:visited{color:#000;text-decoration:none;}
+a:hover{color:#f60;text-decoration:none;}
+.hackbox {border-top:1px solid transparent !important;margin-top:-1px !important;border-top:0px;margin-top:0px;clear:both;visibility:hidden;}
+#main{width:500px;margin:0 auto;margin-top:50px;}
+#help p{color:#515354;margin-bottom:20px;}

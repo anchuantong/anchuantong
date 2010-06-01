@@ -1,0 +1,59 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,label,textarea,blockquote,th,td,input{margin:0;padding:0;font-size:13px;font-family:'ËÎÌו';color:#58666f;}
+fieldset,img{border:0;vertical-align:middle}
+ol,ul,li {list-style:none;}
+p{margin:0;padding:0;}
+body{font-size:12px;font-family:'ËÎÌו';line-height:180%;text-align:left;}
+a:link,a:active,a:visited{color:#000;text-decoration:none;}
+a:hover{color:#f60;text-decoration:none;}
+.hackbox {border-top:1px solid transparent !important;margin-top:-1px !important;border-top:0px;margin-top:0px;clear:both;visibility:hidden;}
+#headerbar{width:100%;background:#F2F2F2;height:40px;}
+#headerbar #logobar{float:left;border-right: 1px dotted #c0c0c0;}
+#headerbar #menubar{height:19px;line-height:19px;padding:10px 0 20px;}
+#headerbar span.menu-item-separator{border-right: 1px solid #a1a1a1;padding: 0 0 0 0.2em;}
+#headerbar span.menu-item{ padding-left: 0.5em;vertical-align: middle;}
+#headerbar span.menu-item a,#headerbar span.menu-item a:visited{color: #333333;}
+#headerbar span.menu-item-icon{padding: 3px 5px 0; vertical-align: middle;}
+#headerbar span.menu-item-icon a{background-position: 0px 50%;background-repeat: no-repeat; padding: 1px 0px 1px 20px;}
+#headerbar span.my-dashboard a{background-image: url(images/my-dashboard-16.png);}
+#headerbar span.my-profile a{background-image: url(images/my-profile-16.png);}
+#headerbar span.sites a{background-image: url(images/site-16.png);}
+#headerbar span.people a{background-image: url(images/users-16.png);}
+#headerbar .link-menu-button span.menu-item-icon{padding: 1px 5px 0;}
+#headerbar #personal-menu{float:left;margin:5px 10px 0 0;}
+#headerbar #util-menu{float:right;margin:5px 10px 0 0;}
+#headerbar .search-site-icon{background-image: url(images/select_arrow.gif); background-position: left bottom;background-repeat: no-repeat;cursor: pointer;left: -2px;padding-left: 12px;padding-top: 4px;position: relative;top: 2px;}  
+#headerbar .search-tinput{background-image: url(images/search-16.png);background-position: 2px 50%;background-repeat: no-repeat;color: default;padding-left: 20px;width: 12em;border:1px solid #ccc;}
+#headerbar .search-tinput .gray{background-image: url(images/search-16-gray.png);color: #999;}
+
+#page-title{background:#6CA5CE;border-top:1px dashed 457F63;border-bottom:1px dashed 457F63;height:32px;line-height:32px;}
+#page-title .title{color:#FFF;font-weight:bold;font-size:16px;padding-left:10px;}
+#page-title .links{float:right;margin-right:10px;}
+#page-title .links .title-button{background:url(images/title-button-bg.png) repeat-x;border:1px solid #286a99;padding:3px 8px;color:#000;}
+
+#page-nav{background:#73B4DA url(images/nav-bg.png) repeat-x;border-bottom:1px solid #4B86AE;height:24px;line-height:24px;}
+span.nav-separator{border-right:1px dotted #457A9C;}
+span.nav-item{}
+span.nav-item a{color:#000;}
+span.nav-item-on{}
+span.nav-item-on a{color:#FFF;}
+
+#toolbar{background-color:#E9EDEF;border-bottom:2px solid #C7CCCE;clear:left;padding:6px 0;}
+#toolbar a{color:#000;}
+#toolbar a:hover{color:#009300;text-decoration:underline;}
+#toolbar a.on{color:#009300;}
+
+
+#leftbar{width:300px;float:left;margin:20px;}
+#middlebar{width:600px;float:left;margin:20px;}
+.dashlet{border: 1px solid #bababa;background-color: white;}
+.dashlet .titleh{background:#D7E0E7 url(images/dashlet-title-bg.png) repeat-x;height:24px;line-height:24px;border-bottom:1px dashed #BABABA;color:#262D35;padding-left: 9px;}
+.dashlet .body {background-color:#F9FCFD;}
+.dashlet .scrollableList{height:208px;margin-right:1px;overflow:auto;padding:8px 0;}
+div.detail-list-item-alt{background-color: #fffbdd;border-bottom: 1px solid #ddd6a0;padding: 7px 9px 5px;}
+div.detail-list-item{border-bottom:1px dashed #E9E9E9;}
+div.detail-list-item-last{};
+.title4{color:#038603;font-weight:bold;font-size:13px;}
+.title2{color:#6CA5CE;}
+.title2-bold{color:#6CA5CE;font-weight:bold;}
+
+.header-bar{background-color:#E3EAEC;border-bottom:2px solid #F0F3F4;font-size:116%;font-weight:bold;height:1.1em;margin:1.5em 1em 1em;padding:0.3em;}

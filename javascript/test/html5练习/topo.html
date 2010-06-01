@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>image Test</title>
+<style>
+ol,ul,li {list-style:none;margin:0;}
+ol,ul,li,div,p {margin:0;padding:0;}
+.hackbox {border-top:1px solid transparent !important;margin-top:-1px !important;border-top:0px;margin-top:0px;clear:both;visibility:hidden;}
+#main{}
+.devices{position: absolute;z-index:100;border:2px solid green;width:180px;}
+.devices ul{width:155px;margin:0 15px;border-top:1px solid #000;border-left:1px solid #000;height:42px;}
+.devices ul li{float:left;width:30px;height:20px;text-align:center;border-right:1px solid #000;border-bottom:1px solid #000;}
+.d_menu{position: absolute;z-index:200;border:1px solid #ccc;width:60px;background:#FFFFFF;}
+.d_menu p{padding:2px 5px;}
+canvas{position: absolute;z-index:1;}
+</style>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+<script src="jquery.js"></script>
+<script src="excanvas.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+(function($) {
+	var defaultOptions={}
+	 
+	var devices=[];
+	for(var i=1;i<=3;i++){
+		left=200*i;
+		top=400*i;
+		if(i==3){left=600;top=10;}
+		var device={id:i,name:"csw_7606_"+i,left:left,top:top};
+		var ports=[];
+		for(var j=1;j<=10;j++){
+			ports.push({id:j,name:"G1/"+j,index:j,ip:"192.168."+i+"."+j});
+			
+		}
+		device.ports=ports;
+		devices.push(device);
+	}
+	
+	var w=$.fn.network = function(options){
+		options = options ||{}
+		if (typeof(options) != "object") {
+			options = {}
+		}
+		this.network.root=this;
+		this.network.start=false;
+		this.network.startId="";
+		this.network.lines=[{fromId:"p_1_1",toId:"p_2_1"},{fromId:"p_1_3",toId:"p_2_3"}];
+		
+		this.network.beginPos={x:0,y:0};
+		this.network.countMove=0;
+		this.network.width=this.width();
+		this.network.height=this.height();
+		this.network.createCanvas();
+		this.network.initDevice(devices);
+		
+	}
+	
+	w.createCanvas=function(){
+		var canvas = document.createElement("canvas");
+		this.width=
+		canvas.setAttribute("width", this.width);
+    	canvas.setAttribute("height", this.height);
+		canvas.setAttribute("id", "canvas");
+		if(canvas.getContext==undefined){
+			G_vmlCanvasManager.initElement(canvas);
+		}
+		var ctx=canvas.getContext('2d');
+		this.ctx=ctx;
+    	this.root.append(canvas)
+	}
+	
+	w.initDevice=function(devices){
+		
+		for(var i=0;i<devices.length;i++){
+			var divObj=$("<div></div>");
+			var device=devices[i];
+			divObj.addClass("devices");
+			divObj.attr("id","device_"+device.id);
+			divObj.css("left",device.left+"px").css("top",device.top+"px");
+			var ports=device.ports;
+			if(ports==undefined||ports.length==0){
+				continue;
+			}
+			var ulObj=$("<ul></ul>");
+			ulObj.attr("id","ul_"+device.id);
+			for(var j=0;j<ports.length;j++){
+				var liObj=$("<li></li>");
+				var port=ports[j];
+				liObj.attr("id","port_"+port.id);
+				liObj.attr("title","port_"+port.id);
+				liObj.html(port.index);
+				
+	
+				ulObj.append(liObj);
+				liObj.mouseover(function(){
+					$(this).css("background","red");
+				})
+			}
+			divObj.append(ulObj);
+			this.root.append(divObj);
+		}
+	}
+	
+	w.draw=function(position,id){
+		if(position==undefined){
+			position=null;
+		}
+		var ctx=this.ctx;
+		var width=this.width;
+		var height=this.height;
+		ctx.clearRect(0, 0, width, height);
+		var toDraw=true;
+		var lines=this.lines;
+		for(var i=0;i<lines.length;i++){
+			var lineObj=lines[i];
+			ctx.beginPath();
+			ctx.strokeStyle ="#FF0000";
+			ctx.lineWidth=1;
+			if(lineObj.fromId==id||lineObj.toId==id){
+				toDraw=false;
+				ctx.lineWidth=2;
+				start=false;
+			}
+			
+			var fromObj=$("#"+lineObj.fromId).offset();
+			var toObj=$("#"+lineObj.toId).offset();
+			ctx.moveTo(fromObj.left, fromObj.top);
+			ctx.lineTo(toObj.left, toObj.top);
+			ctx.stroke();
+		}
+		
+		if(position!=null&&toDraw){
+			ctx.beginPath();
+			ctx.strokeStyle ="#FF0000";
+			ctx.lineWidth=1;
+			ctx.moveTo(this.beginPos.x, this.beginPos.y);
+			ctx.lineTo(position.x, position.y);
+			ctx.stroke();
+		}
+		
+	}
+	
+	w.getMousePosition=function(ev){
+    	if(ev.pageX || ev.pageY){//支持 火狐
+        	return {x:ev.pageX, y:ev.pageY};
+    	}
+    	//支持IE
+    	return {
+        	x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+        	y:ev.clientY + document.body.scrollTop - document.body.clientTop
+    	};
+	}
+	
+	w.isRightMouse=function(event){
+		if(document.all){
+			if(event.button==2){
+				return true;
+		    }
+		}
+		if(event.button==2){
+			return true;
+		}
+		return false;
+	}
+	
+	document.oncontextmenu=function(e){return false;}  
+	document.onselectstart=function(e){return false;}  
+	
+})(jQuery);	
+
+ 
+
+
+
+
+$(document).ready(function(){
+	$("div").network()
+	
+	var start=false;
+	var startId="";
+	var beginPos={x:0,y:0};
+	var countMove=0;
+	var ctx = document.getElementById('canvas').getContext('2d');
+	
+	var lines=[{fromId:"p_1_1",toId:"p_2_1"},{fromId:"p_1_3",toId:"p_2_3"}];
+	
+	$(".devices ul li").mousedown(function(event){
+		var event=event||window.event;
+		if(!isRightMouse(event)){leftMouseDown(this)}else{
+			event.cancelBubble   =   true  
+			event.returnValue   =   false;
+			$(".d_menu").hide();
+			var divObjId=$(this).attr("id")+"_d";
+			var divObj=$("#"+divObjId);
+			if(divObj.html()==null){
+				divObj=$("<div></div>");
+				divObj.attr("id",divObjId);
+				divObj.addClass("d_menu");
+				divObj.html("<p><a href=''>修改</a></p><p><a href=''>删除</a></p>");
+				var position=$(this).offset();
+				divObj.css("left",(position.left+40)+"px");
+				divObj.css("top",position.top+"px");
+			}
+			$("#main").append(divObj);
+		}
+
+	})
+	$("#main").mousemove(function(event){
+		if(start){
+			countMove++;
+			if(countMove%10==1){
+				var posss=getMousePosition(event);
+				draw(posss);
+			}
+			
+
+		}
+
+	})
+
+	$("canvas").mousedown(function(event){
+		var event=event||window.event;
+		if(isRightMouse(event)){
+			start=false;
+			draw()
+		}
+
+	})
+
+	function leftMouseDown(obj){
+		var position=$(obj).offset();
+		id=$(obj).attr("id")
+		if(start==true){
+			if($("#"+id).parent().attr("id")==$("#"+startId).parent().attr("id")){
+				start=false;
+				draw();
+				return;
+			}
+			draw({x:position.left,y:position.top},id);
+			lines.push({fromId:startId,toId:id})
+			start=false;
+			countMove=0;
+		}else{
+			beginPos.x=position.left;
+			beginPos.y=position.top;
+			start=true;
+			startId=id;
+			draw(null,id);
+		}
+	}
+
+	function draw(position,id){
+		if(position==undefined){
+			position=null;
+		}
+		var width=document.getElementById('canvas').width;
+		var height=document.getElementById('canvas').height;
+		ctx.clearRect(0, 0, width, height);
+		var toDraw=true;
+		for(var i=0;i<lines.length;i++){
+			var lineObj=lines[i];
+			ctx.beginPath();
+			ctx.strokeStyle ="#FF0000";
+			ctx.lineWidth=1;
+			if(lineObj.fromId==id||lineObj.toId==id){
+				toDraw=false;
+				ctx.lineWidth=2;
+				start=false;
+			}
+			
+			var fromObj=$("#"+lineObj.fromId).offset();
+			var toObj=$("#"+lineObj.toId).offset();
+			ctx.moveTo(fromObj.left, fromObj.top);
+			ctx.lineTo(toObj.left, toObj.top);
+			ctx.stroke();
+		}
+		
+		if(position!=null&&toDraw){
+			ctx.beginPath();
+			ctx.strokeStyle ="#FF0000";
+			ctx.lineWidth=1;
+			ctx.moveTo(beginPos.x, beginPos.y);
+			ctx.lineTo(position.x, position.y);
+			ctx.stroke();
+		}
+		
+	}
+
+	function isRightMouse(event){
+		if(document.all){
+			if(event.button==2){
+				return true;
+		    }
+		}
+		if(event.button==2){
+			return true;
+		}
+		return false;
+	}
+	
+})
+</SCRIPT>
+<body>
+<div id="main">
+
+</div>
+</body>
+</html>

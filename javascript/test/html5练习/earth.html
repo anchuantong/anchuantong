@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>image Test</title>
+<meta content="text/html; charset=GBK" http-equiv="content-type"/>
+<style>
+
+body {
+  text-align: center
+}
+#c2{opacity: 0.6;filter:alpha(opacity=60,Style=0);-moz-opacity:0.6;margin-left:1px;}
+#c{border:2px solid #CCC;}
+</style>
+<!--[if IE]><script src="excanvas.js"></script><![endif]-->
+
+<script>
+var colorlist=new Array(40);
+	colorlist[0]="#000000";    colorlist[1]="#993300";    colorlist[2]="#333300";    colorlist[3]="#003300";
+    colorlist[4]="#003366";    colorlist[5]="#000080";    colorlist[6]="#333399";    colorlist[7]="#333333";
+
+    colorlist[8]="#800000";    colorlist[9]="#FF6600";    colorlist[10]="#808000";colorlist[11]="#008000";
+    colorlist[12]="#008080";colorlist[13]="#0000FF";colorlist[14]="#666699";colorlist[15]="#808080";
+
+    colorlist[16]="#FF0000";colorlist[17]="#FF9900";colorlist[18]="#99CC00";colorlist[19]="#339966";
+    colorlist[20]="#33CCCC";colorlist[21]="#3366FF";colorlist[22]="#800080";colorlist[23]="#999999";
+
+    colorlist[24]="#FF00FF";colorlist[25]="#FFCC00";colorlist[26]="#FFFF00";colorlist[27]="#00FF00";
+    colorlist[28]="#00FFFF";colorlist[29]="#00CCFF";colorlist[30]="#993366";colorlist[31]="#CCCCCC";
+
+    colorlist[32]="#FF99CC";colorlist[33]="#FFCC99";colorlist[34]="#FFFF99";colorlist[35]="#CCFFCC";
+    colorlist[36]="#CCFFFF";colorlist[37]="#99CCFF";colorlist[38]="#CC99FF";colorlist[39]="#FFFFFF";
+
+var config={
+	radius:300,
+	arcs:[
+		]}
+var arcs=[];
+for(var i=0;i<=360;i+=10){
+	var obj={};
+	obj.x=i;
+	var index=i/10;
+	if(index>39){
+		index=index-40;
+	}
+	obj.color=colorlist[i/10];
+	arcs.push(obj)
+}
+config.arcs=arcs
+var canvas,ctx;
+var start=-1;
+var startMousePosition={x:0,y:0};
+function drawOneArc(obj){
+
+}
+
+function draw(){
+	canvas=document.getElementById('c');
+	ctx = canvas.getContext('2d');
+	loop()
+
+}
+
+function loop(){
+	var radius=config.radius;
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle="#000000"
+	ctx.fillRect(0,0,canvas.width,canvas.height);
+	var centerX=canvas.width/2;
+	var centerY=canvas.height/2;
+    ctx.translate(centerX,centerY);
+
+	// 画出一个圆的空间        
+    ctx.beginPath();
+    ctx.arc(0,0,radius,0,Math.PI*2,true);
+    ctx.clip();
+
+	// 设置空间背景
+	var lingrad = ctx.createLinearGradient(0,-centerY,0,centerY);
+	lingrad.addColorStop(0, '#232256');
+	lingrad.addColorStop(1, '#143778');
+	//lingrad.addColorStop(0, '#FFFFFF');
+	//lingrad.addColorStop(1, '#FFFFFF');
+  
+	ctx.fillStyle = lingrad;
+	ctx.fillRect(-radius,-radius,2*radius,2*radius);
+	var arcs=config.arcs;
+	start+=1;
+	if(start<0){
+		start=-start;
+	}
+	start=start%360;
+	if(start==360){
+		start=0;
+	}
+	var end=start+180;
+	var halfEnd=parseInt(end/2);
+	document.getElementById("test").innerHTML=start+","+end
+	for(var i=0;i<arcs.length;i++){
+		var o=arcs[i];
+		var x=o.x;
+		var x2=x+180;
+		
+		dwawLine(o,x,start,end)
+		if(start>180){
+			start=start-180;
+			x=2*radius-x;
+			dwawLine(o,x,0,start)
+		}
+	}
+	ctx.translate(-centerX,-centerY);
+	//setTimeout(loop, 1);
+}
+
+function dwawLine(o,x,start,end){
+	if(x>=start&&x<=end){
+		var radius=config.radius;
+		ctx.fillStyle = o.color;
+		x=x-start;
+		x=x-90;
+		x=radius*x/90;
+		if(x>radius){
+			return;
+		}
+		//ctx.fillRect(x,0,5,5);
+		ctx.beginPath();
+		ctx.strokeStyle =o.color;
+		ctx.lineWidth=1;
+		ctx.moveTo(0, -radius);
+		//var cp1x=x/2+x;
+		//var cp1y=0;
+		//ctx.quadraticCurveTo(cp1x,cp1y,x, 0)
+		ctx.lineTo(x, 0); 
+		ctx.lineTo(0, radius); 
+		ctx.stroke();
+	}
+}
+
+function moveEarth(ev){
+	ev = ev || window.event;
+    mousePosition = getMousePosition(ev);
+	if(startMousePosition.x>0){
+		var x=mousePosition.x-startMousePosition.x;
+		start=start+x;
+		if(start%5==0){
+			loop()
+		}
+	}
+}
+
+function downEarth(ev){
+	ev = ev || window.event;
+    startMousePosition = getMousePosition(ev);
+}
+function upEarth(ev){
+	ev = ev || window.event;
+    startMousePosition = {x:0,y:0};
+}
+
+
+function getMousePosition(ev){
+    //支持 火狐
+    if(ev.pageX || ev.pageY){
+        return {x:ev.pageX, y:ev.pageY};
+    }
+    //支持IE
+    return {
+        x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+        y:ev.clientY + document.body.scrollTop - document.body.clientTop
+    };
+}
+
+function test(){
+	var radgrad = ctx.createRadialGradient(45,45,10,52,50,50);
+    radgrad.addColorStop(0, '#A7D30C');
+    radgrad.addColorStop(0.9, '#019F62');
+    radgrad.addColorStop(1, 'rgba(1,159,98,0)');
+  
+    ctx.fillStyle = radgrad;
+    ctx.arc(0,0,250,0,Math.PI*2,true);
+    ctx.fill();
+}
+
+
+window.onload = function() {
+	draw()
+	canvas.onmousemove=moveEarth;
+	canvas.onmousedown=downEarth;
+	canvas.onmouseup=upEarth;
+};
+</script>
+
+</head>
+<body>
+<canvas id=c width=800 height=600></canvas>
+<p id="test">地图</p>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>image Test</title>
+<meta content="text/html; charset=GBK" http-equiv="content-type"/>
+<SCRIPT LANGUAGE="JavaScript">
+var img = new Image();
+
+// 使用者變數
+img.src = 'Capitan_Meadows,_Yosemite_National_Park.jpg';
+var CanvasXSize = 800;
+var CanvasYSize = 200;
+var speed = 30; // 數字越小越快
+var scale = 1.05;
+var y = -4.5;   // 垂直位移
+// 結束使用者變數
+
+var dx = 0.75;
+var imgW = img.width*scale;
+var imgH = img.height*scale;
+var x = 0;
+if (imgW > CanvasXSize) { x = CanvasXSize-imgW; } // 影像大於 canvas
+var clearX
+var clearY
+if (imgW > CanvasXSize) { clearX = imgW; }        // 影像大於 canvas
+else { clearX = CanvasXSize; }
+if (imgH > CanvasYSize) { clearY = imgH; }        // 影像大於 canvas
+else { clearY = CanvasYSize; }
+var ctx;
+
+function init() {
+    // 取得 Canvas 元素
+    ctx = document.getElementById('canvas').getContext('2d');
+    // 設定更新頻率
+    return setInterval(draw, speed);
+}
+
+function draw() {
+    // 清除 Canvas
+    ctx.clearRect(0,0,clearX,clearY);
+    // 如果影像 <= Canvas 大小
+    if (imgW <= CanvasXSize) {
+        // 重置，從頭開始
+        if (x > (CanvasXSize)) { x = 0; }
+        // 繪製額外的影像
+        if (x > (CanvasXSize-imgW)) { ctx.drawImage(img,x-CanvasXSize+1,y,imgW,imgH); }
+    }
+    // 如果影像 > Canvas 大小
+    else {
+        // 重置，從頭開始
+        if (x > (CanvasXSize)) { x = CanvasXSize-imgW; }
+        // 繪製額外的影像
+        if (x > (CanvasXSize-imgW)) { ctx.drawImage(img,x-imgW+1,y,imgW,imgH); }
+    }
+    // 繪製影像
+    ctx.drawImage(img,x,y,imgW,imgH);
+    // 移動量
+    x += dx;
+}
+
+</SCRIPT>
+<body onload="init();">
+<canvas id="canvas" width="800" height="200"></canvas>
+</body>
+</html>
