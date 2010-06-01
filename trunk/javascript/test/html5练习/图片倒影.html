@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>image Test</title>
+<meta content="text/html; charset=GBK" http-equiv="content-type"/>
+<style>
+
+body {
+  text-align: center
+}
+
+#c2{opacity: 0.6;filter:alpha(opacity=60,Style=0);-moz-opacity:0.6;margin-left:1px;}
+</style>
+<script>
+(function(){
+var ImageTransform=window.ImageTransform=function(selector){
+	selector=selector||[];
+	if(selector.length>0){
+		ImageTransform.draw(document.getElementById(selector[0]))
+	}
+}
+ImageTransform.draw=function(elem){
+		var img = new Image;
+		img.src=elem.src;
+		var width=elem.offsetWidth;
+		var height=elem.offsetHeight;
+		var canvas=document.createElement("canvas");
+		canvas.width=width;
+		canvas.height=height;
+		canvas.setAttribute("style","position:absolute;left:"+elem.offsetLeft+"px;top:"+(elem.offsetTop+height)+"px;");
+		document.body.appendChild(canvas);
+		elem.parentNode.insertBefore(canvas,elem)
+		var ctx = canvas.getContext('2d');
+		
+		ctx.save();
+		ctx.translate(width, height);
+		ctx.rotate(Math.PI*2)
+		ctx.scale(-1, -1);
+		ctx.drawImage(img, 0, 0, width, height);
+		ctx.restore();
+
+}
+
+window.onload = function() {
+	 ImageTransform(["test"])
+};
+})()
+</script>
+</head>
+<body>
+<img id="test" src="untitled1.jpg" style="filter:flipv progid:DXImageTransform.Microsoft.Alpha(opacity=100, style=1, finishOpacity=0, startx=0, starty=0,finishx=0, finishy=48);filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);"/>
+
+<p>图片倒影</p>
+
+</body>
+</html>

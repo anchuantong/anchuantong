@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<html>
+<head>
+<title>thread</title>
+
+</head>
+<body>
+</body>
+<script>
+function Thread(){
+      this.sleepTime=0;
+}
+var current_thread=new Thread();
+Thread.prototype.sleep=function(time,callback){
+       this.sleepTime=time;
+	   this.sleepTimer=setInterval("current_thread.sleepMethod("+callback+")",1000) 
+ 
+}
+
+Thread.prototype.sleepMethod=function(callback){
+	   this.sleepTime=this.sleepTime-1
+	   document.body.innerHTML=this.sleepTime;
+       if( this.sleepTime==0){
+                   clearInterval(this.sleepTimer);
+	   }else{
+            eval(callback)
+	   }
+}
+alert("fffffffff");
+current_thread.sleep(5,alert("gggggggggg"))
+
+current_thread.sleep(5)
+</script>
+</html>

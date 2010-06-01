@@ -1,0 +1,32 @@
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+//alert(Math.PI)
+//alert(Math.sin(Math.PI/30))
+var radius=250;
+var radius2=250-1;
+var pingfang=radius*radius;
+for(var i=0;i<=radius;i++){
+   h=radius-i;
+   h2=pingfang-(h*h);
+   width=parseInt(Math.sqrt(h2))//·´Æ½·½
+   left=radius-width;
+   width=width*2
+   document.write("<div style=\"border-left:1px solid #ccc;border-right:1px solid #ccc;width:"+width+"px;height:1px;line-height:1px;padding:0;margin:0;margin-left:"+left+"px;\">&nbsp;</div>");
+}
+
+for(var i=radius2;i>=0;i--){
+   h=radius-i;
+   h2=pingfang-(h*h);
+   width=parseInt(Math.sqrt(h2))
+   left=radius-width;
+   width=width*2
+   document.write("<div style=\"background:#000;width:"+width+"px;height:1px;line-height:1px;padding:0;margin:0;margin-left:"+left+"px;\">&nbsp;</div>");
+}
+//-->
+</SCRIPT>
+
+
+
+
+

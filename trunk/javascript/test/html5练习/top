@@ -1,0 +1,188 @@
+if(document.all){ //IE
+
+var vmlStr="<!--[if gte vml 1]><v:oval strokecolor=blue dashstyle='dash' style='position:absolute;z-index:1;left:200;top:190;width:700;height:450'><v:stroke   dashstyle='dash'/> </v:oval>"
+for(var i=0;i<sites.length;i++){
+	var site=sites[i];
+	vmlStr+="<v:Oval strokecolor='"+site.color+"'    id='node_"+site.name+"' class='sites' style='width:"+site.width+";height:"+site.height+";left:"+site.left+";top:"+site.top+";'></v:Oval> "
+}
+vmlStr+="<![endif]-->"
+document.getElementById("board").innerHTML=vmlStr;
+initSwitch()
+var str="<!--[if gte vml 1]>";
+for(var i=0;i<flags.length;i++){
+	var flag=flags[i];
+	var formObj=$("#"+flag.from);
+	var leftFrom=formObj.offset().left-rootElem.offset().left+20;
+	var topFrom=formObj.offset().top-rootElem.offset().top+20;
+	var toObj=$("#"+flag.to);
+	var leftTo=toObj.offset().left-rootElem.offset().left+20;
+	var topTo=toObj.offset().top-rootElem.offset().top+20;
+	
+	
+}
+
+for(var i=0;i<trafficDevices.length;i++){
+	var trafficDevice=trafficDevices[i];
+	var from=$("#"+trafficDevice.from);
+	var to=$("#"+trafficDevice.to);
+	var left=to.offset().left;
+	var top=to.offset().top;
+	if(from.offset().left>to.offset().left){
+		left=left+(from.offset().left-to.offset().left)/2;
+	}else{
+		left=left-(to.offset().left-from.offset().left)/2;
+	}
+	if(from.offset().top>to.offset().top){
+		top=top+(from.offset().top-to.offset().top)/2;
+	}else{
+		top=top-(to.offset().top-from.offset().top)/2;
+	}
+	var leftFrom=from.offset().left-rootElem.offset().left+20;
+	var topFrom=from.offset().top-rootElem.offset().top+20;
+	var toObj=$("#"+flag.to);
+	var leftTo=left-rootElem.offset().left+20;
+	var topTo=top-rootElem.offset().top+20;
+	var bps=trafficDevice.bps;
+	var color=getLineColor(bps);
+	str+="<v:line class=\"line\"  id='"+trafficDevice.from+"  ::  "+trafficDevice.to+"' format2=\""+trafficDevice.from+","+trafficDevice.to+"\""
+	str+=" from=\""+leftFrom+"px,"+topFrom+"px\" ";
+	str+=" to=\""+leftTo+"px,"+topTo+"px\"   strokecolor=\""+color+"\" strokeweight=\"5px\"   o:insetmode=\"auto\">";
+	str+="<v:stroke Endarrow='classic' ></v:stroke>";
+	//str+="<span class='traffic_val'>"+trafficDevice.bps+"</span>"
+	str+="</v:line>";
+	if(trafficDevice.flagId!=undefined){
+	var href="trafficLinkPort.htm?portId="+trafficDevice.formPort+"&portId2="+trafficDevice.toPort+"&flagId="+trafficDevice.flagId+"&tab=2"
+	var aObj=$("<a></a>");
+	aObj.attr("href",href);
+	aObj.attr("title","点击查看此链路趋势");
+	var spanObj=$("<span></span>");
+    aObj.html(trafficDevice.bps);
+    spanObj.addClass("traffic_val");
+	var left2=to.offset().left-from.offset().left;
+	var top2=to.offset().top-from.offset().top;
+	left2=from.offset().left+left2/3;
+	top2=from.offset().top+top2/3+10;
+	
+	spanObj.css("left",left2+"px").css("top",top2+"px").css("border","2px solid "+color);
+	spanObj.append(aObj);
+    rootElem.append(spanObj);
+	}
+
+}
+
+str+="<![endif]-->";
+var lineObj=$("<div></div>");
+lineObj.html(str);
+lineObj.css("position","absolute").css("left",(rootElem.offset().left)+"px").css("top",rootElem.offset().top+"px").css("z-index",15);
+rootElem.append(lineObj);
+
+
+
+$(".line").mouseover(function(){
+	//$(this).attr("strokecolor","red");
+	var text=$(this).attr("format2");
+	var ids=text.split(",");
+	for(var i=0;i<ids.length;i++){
+	   $("#"+ids[i]+"_text").show()
+	   $("#"+ids[i]+"_text").css("z-index",999);
+	   $("#"+ids[i]+"_text").css("left",$("#"+ids[i]).offset().left-120);
+	   $("#"+ids[i]+"_text").css("top",$("#"+ids[i]).offset().top+50);	
+	}
+})
+
+$(".line").mouseout(function(){
+	//$(this).attr("strokecolor","blue");
+	var text=$(this).attr("format2");
+	var ids=text.split(",");
+	for(var i=0;i<ids.length;i++){
+	   $("#"+ids[i]+"_text").hide()
+	}
+})
+
+}else{//firefox
+
+		var roott=document.getElementById("board");
+		var canvas=document.createElement("canvas");
+		roott.appendChild(canvas)
+		canvas.setAttribute("width",800);
+		canvas.setAttribute("height",600);
+		canvas.setAttribute("style","top:"+rootElem.offset().top+"px")
+		var ctx = canvas.getContext('2d');
+		for(var i=0;i<sites.length;i++){
+			var siteObj=$("<div></div>");
+			var site=sites[i];
+			siteObj.addClass("sites");
+			siteObj.attr("id","node_"+site.name);
+			siteObj.css("border","2px solid "+site.color);
+			siteObj.css("width",site.width+"px");
+			siteObj.css("height",site.height+"px");
+			siteObj.css("top",site.top+"px");
+			siteObj.css("left",site.left+"px");
+			rootElem.append(siteObj);
+		}
+		initSwitch();
+
+for(var i=0;i<trafficDevices.length;i++){
+	var trafficDevice=trafficDevices[i];
+	var from=$("#"+trafficDevice.from);
+	var to=$("#"+trafficDevice.to);
+	var left=to.offset().left;
+	var top=to.offset().top;
+	if(from.offset().left>to.offset().left){
+		left=left+(from.offset().left-to.offset().left)/2;
+	}else{
+		left=left-(to.offset().left-from.offset().left)/2;
+	}
+	if(from.offset().top>to.offset().top){
+		top=top+(from.offset().top-to.offset().top)/2;
+	}else{
+		top=top-(to.offset().top-from.offset().top)/2;
+	}
+	var left2=from.offset().left-to.offset().left;
+	var top2=from.offset().top-to.offset().top;
+	//if(left2<0){left2=-left2;};
+	//if(top2<0){top2=-top2;};
+
+	var leftFrom=from.offset().left-rootElem.offset().left+20;
+	var topFrom=from.offset().top-rootElem.offset().top+20;
+	var leftTo=left-rootElem.offset().left+20;
+	var topTo=top-rootElem.offset().top+20;
+	var bps=trafficDevice.bps;
+	var color=getLineColor(bps);
+	
+	drawLine(ctx,leftFrom,topFrom,leftTo,topTo,6,color)
+
+	
+	if(trafficDevice.flagId!=undefined){
+	var href=trafficDevice.href;
+	var aObj=$("<a></a>");
+	aObj.attr("href",href);
+	aObj.attr("title","点击查看此链路趋势");
+	var spanObj=$("<span></span>");
+    aObj.html(trafficDevice.bps);
+    spanObj.addClass("traffic_val");
+	var left2=to.offset().left-from.offset().left;
+	var top2=to.offset().top-from.offset().top;
+	left2=from.offset().left+left2/3;
+	top2=from.offset().top+top2/3+10;
+	
+	spanObj.css("left",left2+"px").css("top",top2+"px").css("border","2px solid "+color);
+	spanObj.append(aObj);
+    rootElem.append(spanObj);
+	}
+
+}
+
+
+$("canvas").mouseover(function(){
+	var ctx = this.getContext('2d');
+	
+})
+
+$("canvas").mouseout(function(){
+	$(this).attr("strokecolor","blue");
+	$(this).attr("strokeweight","2px")
+})
+
+}
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>image Test</title>
+<meta content="text/html; charset=GBK" http-equiv="content-type"/>
+<SCRIPT LANGUAGE="JavaScript">
+
+var ctx;
+
+function init() {
+    ctx = document.getElementById('canvas').getContext('2d');
+	var width=document.getElementById('canvas').width;
+	var height=document.getElementById('canvas').height;
+    ctx.beginPath();
+	
+	ctx.strokeStyle ="#CCCCCC";
+	ctx.lineWidth=1
+	for(var i=1;i<width/20;i++){
+		ctx.moveTo(i*20,0);
+		ctx.lineTo(i*20,height);
+		ctx.stroke();
+	}
+
+	for(var i=1;i<height/20;i++){
+		ctx.moveTo(0,i*20);
+		ctx.lineTo(width,i*20);
+		ctx.stroke();
+	}
+	ctx.save();
+	ctx.beginPath()
+
+	ctx.strokeStyle ="#FF0000";
+	ctx.moveTo(0,0);
+	var cp1x=100;
+	var cp1y=20;
+	var cp2x=150;
+	var cp2y=200;
+	ctx.bezierCurveTo(cp1x,cp1y,cp2x,cp2y,200,200);
+	ctx.stroke();
+	ctx.save();
+	ctx.beginPath()
+	ctx.fillStyle ="#00FF00";
+	ctx.arc(cp1x,cp1y,5,0,Math.PI*2, true);
+	ctx.fill();
+	ctx.arc(cp2x,cp2y,5,0,Math.PI*2, true);
+	ctx.fill();
+	ctx.save();
+	ctx.beginPath()
+	ctx.rotate(Math.PI*2/10);
+	ctx.moveTo(100,100)
+	ctx.lineTo(180,100);
+	ctx.stroke();
+	
+	ctx.restore()
+	ctx.beginPath()
+	ctx.moveTo(100,100)
+	ctx.lineTo(180,100);
+	ctx.stroke();
+
+
+}
+
+function draw() {
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+
+  var i = 0;
+  var sin = Math.sin(Math.PI/6);
+  var cos = Math.cos(Math.PI/6);
+  ctx.translate(200, 200);
+  var c = 0;
+  for (i; i <= 12; i++) {
+    c = Math.floor(255 / 12 * i);
+    ctx.fillStyle = "rgb(" + c + "," + c + "," + c + ")";
+    ctx.fillRect(0, 0, 100, 10);
+    ctx.transform(cos, sin, -sin, cos, 0, 0);
+  }
+  
+  ctx.setTransform(-1, 0, 0, 1, 200, 200);
+  ctx.fillStyle = "rgba(255, 128, 255, 0.5)";
+  ctx.fillRect(0, 50, 100, 100);
+}
+
+alert(document.getElementById('status-bar'))
+</SCRIPT>
+<body onload="init();">
+<canvas id="canvas" width="800" height="400" style="border:1px solid #CCC;"></canvas>
+</body>
+</html>

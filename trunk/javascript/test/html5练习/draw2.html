@@ -1,0 +1,49 @@
+<html>
+
+　　<head>
+
+　　<title>Canvas tutorial</title>
+
+<script type="text/javaScript">
+
+function draw(){
+	var canvas = document.getElementById('tutorial');
+	if (canvas.getContext){
+		var ctx = canvas.getContext('2d');
+		ctx.beginPath();
+		ctx.moveTo(125,125);
+		ctx.lineTo(0,45);
+		ctx.stroke(); 
+
+	}
+}
+
+function test(){
+	var canvas = document.getElementById('tutorial');
+	if (canvas.getContext){
+		var ctx = canvas.getContext('2d');
+		ctx.clearRect(0, 0, 150, 150);
+		ctx.beginPath();
+		ctx.moveTo(125,125);
+		ctx.lineTo(125,45);
+		ctx.stroke(); 
+
+	}
+}
+
+</script>
+<style type="text/css">
+
+　　canvas { border: 1px solid black; margin:50px;}
+
+　　</style>
+
+　　</head>
+
+<body onload="draw();">
+<canvas id="tutorial" width="150" height="150"></canvas>
+
+<input type="button" value="draw" onclick="test()">
+</body>
+
+　　</html>

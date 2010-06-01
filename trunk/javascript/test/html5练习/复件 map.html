@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>image Test</title>
+<meta content="text/html; charset=GBK" http-equiv="content-type"/>
+<style>
+
+body {
+  text-align: center
+}
+#c2{opacity: 0.6;filter:alpha(opacity=60,Style=0);-moz-opacity:0.6;margin-left:1px;}
+#c{border:2px solid #CCC;}
+</style>
+<!--[if IE]><script src="excanvas.js"></script><![endif]-->
+<script type="text/javascript"> 
+ var mousePosition={x:0,y:0};
+function getMousePosition(ev){
+    //支持 火狐
+    if(ev.pageX || ev.pageY){
+        return {x:ev.pageX, y:ev.pageY};
+    }
+    //支持IE
+    return {
+        x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+        y:ev.clientY + document.body.scrollTop - document.body.clientTop
+    };
+}
+
+function mouseMove(ev){
+    ev = ev || window.event;
+    mousePosition = getMousePosition(ev);
+        
+}
+
+//事件添加
+document.onmousemove = mouseMove;
+
+
+</script>
+<script>
+var maps=[
+	{bgcolor:"blue",locs:[{x:10,y:10},{x:160,y:160},{x:160,y:350}]},
+	{bgcolor:"red",locs:[{x:160,y:160},{x:270,y:60},{x:80,y:0}]}
+]
+
+function checkInArea(locs){
+	
+}
+
+var canvas;
+
+function draw(){
+	canvas=document.getElementById('c');
+	var ctx = canvas.getContext('2d');
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+
+	//ctx.globalAlpha = 0.2;
+	var left=mousePosition.x-canvas.offsetLeft;
+	var top=mousePosition.y-canvas.offsetTop;
+	if(top<0){top==0};
+	if(left<0){left==0};
+	for(var i=0;i<maps.length;i++){
+		ctx.beginPath();
+		var locs=maps[i].locs;
+		ctx.strokeStyle="red";
+		ctx.lineWidth=20
+		ctx.moveTo(locs[0].x+left,locs[0].y+top);
+		for(var j=1;j<locs.length;j++){
+			ctx.lineTo(locs[j].x+left,locs[j].y+top);
+		}
+		ctx.lineTo(locs[0].x+left,locs[0].y+top);
+		ctx.fillStyle=maps[i].bgcolor;
+		ctx.fill(); 
+	}
+	for(var i=0;i<maps.length;i++){
+		ctx.beginPath();
+		var locs=maps[i].locs;
+		ctx.strokeStyle="#000000";
+		ctx.lineWidth=1
+		ctx.moveTo(locs[0].x+left,locs[0].y+top);
+		for(var j=1;j<locs.length;j++){
+			ctx.lineTo(locs[j].x+left,locs[j].y+top);
+		}
+		ctx.lineTo(locs[0].x+left,locs[0].y+top);
+		ctx.fillStyle=maps[i].bgcolor;
+		ctx.stroke(); 
+	}
+drawLinearGradient(ctx)
+}
+function drawLinearGradient(ctx){
+var lingrad = ctx.createLinearGradient(0,0,0,150);
+  lingrad.addColorStop(0, '#00ABEB');
+  lingrad.addColorStop(0.5, '#fff');
+  lingrad.addColorStop(0.5, '#26C000');
+  lingrad.addColorStop(1, '#fff');
+
+  // 分配漸層給填充和邊線樣式
+  ctx.fillStyle = lingrad;
+  
+  // 繪製圖形
+  ctx.fillRect(10,10,130,130);
+}
+
+
+window.onload = function() {
+	draw()
+	document.getElementById('c').onmousemove=function(){
+			draw()
+	}
+	
+};
+</script>
+
+</head>
+<body>
+<canvas id=c width=800 height=600></canvas>
+<p>地图</p>
+
+</body>
+</html>
